@@ -7,6 +7,9 @@
     {
         private static readonly List<string> OptionsList = new()
         {
+            "Option 0",
+            "Option 1",
+            "Exit",
         };
 
         /// <summary>
@@ -79,10 +82,10 @@
         }
 
         /// <summary>
-        /// Method that generates view.
+        /// Generate view of provied options options with one highlited entry..
         /// </summary>
-        /// <param name="options">List of values to print in options.</param>
-        /// <param name="pointer">Highlighted option.</param>
+        /// <param name="options">List of entries to print in menu.</param>
+        /// <param name="pointer">Highlighted entry pointer.</param>
         public static void GenerateView(List<string> options, int pointer)
         {
             Console.Clear();
