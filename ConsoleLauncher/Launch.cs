@@ -1,38 +1,10 @@
 ﻿namespace ConsoleLauncher
 {
     /// <summary>
-    /// Main class for this app.
+    /// ConsoleLauncher main class.
     /// </summary>
-    public static class Program
+    public class Launch
     {
-        private static readonly List<string> OptionsList = new()
-        {
-            "Option 0",
-            "Option 1",
-            "Exit",
-        };
-
-        /// <summary>
-        /// Main method.
-        /// </summary>
-        public static void Main()
-        {
-            var value = Menu(OptionsList);
-            switch (value)
-            {
-                case 0:
-                    Console.WriteLine($"Wchodze w {OptionsList[0]}");
-                    Console.ReadLine();
-                    break;
-                case 1:
-                    Console.WriteLine($"Wchodze w {OptionsList[0]}");
-                    break;
-                case 2:
-                    Console.WriteLine("WYCHODZE XD");
-                    break;
-            }
-        }
-
         /// <summary>
         /// Initializes user-friendly, console menu that
         /// allow user to use arrows to navigate thru menu options.
@@ -86,7 +58,7 @@
         /// </summary>
         /// <param name="options">List of entries to print in menu.</param>
         /// <param name="pointer">Highlighted entry pointer.</param>
-        public static void GenerateView(List<string> options, int pointer)
+        private static void GenerateView(List<string> options, int pointer)
         {
             Console.Clear();
 
