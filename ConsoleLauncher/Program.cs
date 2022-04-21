@@ -18,12 +18,12 @@
         public static void Main()
         {
             var pointer = 0;
- 
+
             for (int i = 0; i < 100; i++)
             {
-                GenerateScreen(Menus, pointer);
-                
-                var x = WaitForAction();
+                GenerateView(Menus, pointer);
+
+                var x = GetAction();
                 pointer += x;
 
             }
@@ -36,7 +36,7 @@
         /// </summary>
         /// <param name="options">List of values to print in options.</param>
         /// <param name="pointer">Highlighted option.</param>
-        public static void GenerateScreen(List<string> options, int pointer)
+        public static void GenerateView(List<string> options, int pointer)
         {
             Console.Clear();
 
@@ -57,22 +57,16 @@
             }
         }
 
-        private static int WaitForAction()
+        private static int GetAction()
         {
             var action = Console.ReadKey();
 
-            if (action.Key == ConsoleKey.DownArrow)
+            return action.Key switch
             {
-                return 1;
-            }
-            else if (action.Key == ConsoleKey.UpArrow)
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
+                ConsoleKey.DownArrow => 1,
+                ConsoleKey.UpArrow => -1,
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }
