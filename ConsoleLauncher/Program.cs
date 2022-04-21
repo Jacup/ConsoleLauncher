@@ -5,11 +5,8 @@
     /// </summary>
     public static class Program
     {
-        private static readonly List<string> Menus = new()
+        private static readonly List<string> OptionsList = new()
         {
-            "Menu1",
-            "Menu2",
-            "Exit",
         };
 
         /// <summary>
@@ -17,18 +14,68 @@
         /// </summary>
         public static void Main()
         {
-            var pointer = 0;
-
-            for (int i = 0; i < 100; i++)
+            var value = Menu(OptionsList);
+            switch (value)
             {
-                GenerateView(Menus, pointer);
+                case 0:
+                    Console.WriteLine($"Wchodze w {OptionsList[0]}");
+                    Console.ReadLine();
+                    break;
+                case 1:
+                    Console.WriteLine($"Wchodze w {OptionsList[0]}");
+                    break;
+                case 2:
+                    Console.WriteLine("WYCHODZE XD");
+                    break;
+            }
+        }
 
-                var x = GetAction();
-                pointer += x;
-
+        /// <summary>
+        /// Initializes user-friendly, console menu that
+        /// allow user to use arrows to navigate thru menu options.
+        /// </summary>
+        /// <param name="options">List of options to show in menu.</param>
+        /// <returns>Position of selected option as integer. </returns>
+        public static int Menu(List<string> options)
+        {
+            var pointer = 0;
+            var isSelected = false;
+            if (options.Count < 1)
+            {
+                throw new NotImplementedException("Options list contains no elements!");
             }
 
+            while (!isSelected)
+            {
+                GenerateView(options, pointer);
 
+                var action = GetAction();
+
+                switch (action.Key)
+                {
+                    case ConsoleKey.Enter:
+                        isSelected = true;
+                        break;
+                    case ConsoleKey.PageUp:
+                    case ConsoleKey.UpArrow:
+                        if (pointer > 0)
+                        {
+                            pointer--;
+                        }
+
+                        break;
+                    case ConsoleKey.PageDown:
+                    case ConsoleKey.DownArrow:
+                        if (pointer < options.Count - 1)
+                        {
+                            pointer++;
+                        }
+
+                        break;
+                }
+            }
+
+            return pointer;
         }
 
         /// <summary>
@@ -57,16 +104,10 @@
             }
         }
 
-        private static int GetAction()
+        private static ConsoleKeyInfo GetAction()
         {
-            var action = Console.ReadKey();
-
-            return action.Key switch
-            {
-                ConsoleKey.DownArrow => 1,
-                ConsoleKey.UpArrow => -1,
-                _ => throw new NotImplementedException(),
-            };
+            Console.WriteLine("\nUse arrows to navigate. Enter to select and option.");
+            return Console.ReadKey();
         }
     }
 }
