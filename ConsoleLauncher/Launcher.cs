@@ -3,7 +3,7 @@
     /// <summary>
     /// ConsoleLauncher tool.
     /// </summary>
-    public class Launch
+    public class Launcher
     {
         /// <summary>
         /// Initializes user-friendly, console menu that

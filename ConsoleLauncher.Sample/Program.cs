@@ -17,7 +17,7 @@
 
             while (!exit)
             {
-                var value = Launch.Menu(optionList);
+                var value = Launcher.Menu(optionList);
 
                 switch (value)
                 {
@@ -46,7 +46,7 @@
                 "Exit",
             };
 
-            var value = Launch.Menu(optionList);
+            var value = Launcher.Menu(optionList);
 
             switch (value)
             {
