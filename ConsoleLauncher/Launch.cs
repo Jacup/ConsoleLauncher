@@ -1,7 +1,7 @@
 ﻿namespace ConsoleLauncher
 {
     /// <summary>
-    /// ConsoleLauncher main class.
+    /// ConsoleLauncher tool.
     /// </summary>
     public class Launch
     {
