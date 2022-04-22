@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  publish:
 
     runs-on: ubuntu-latest
 
@@ -19,8 +19,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.5
+    - name: NuGet Publisher
+      uses: Jacup/publish-nuget@v2.6.0
       with:
         PROJECT_FILE_PATH: ConsoleLauncher/ConsoleLauncher.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
