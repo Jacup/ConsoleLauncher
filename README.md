@@ -1,27 +1,32 @@
-# ConsoleLauncher ![build](https://github.com/Jacup/ConsoleLauncher/blob/main/.github/workflows/dotnet.yml/badge.svg) ![latest version](https://github.com/Jacup/ConsoleLauncher/blob/main/.github/workflows/publish.yml/badge.svg)
+# ConsoleLauncher [![build](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml)
+
 > ConsoleLaucher is simple tool for your .NET console application. ConsoleLauncher helps you to create useful and user-friedly navigation menu in  just two steps.
 
+
 ## Table of Contents
+
 * [General Info](#general-information)
-* [Features](#features-/-roadmap)
+* [Features](#features--roadmap)
 * [Get Started](#get-started)
 * [~~Screenshots~~](#screenshots)
 * [Contact](#contact)
 
 
 ## General Information
+
 **ConsoleLauncher** is a .NET tool, that helps you to create simply, user-friendly console menu. Navigation is handled by using Arrows (alt. PgUp/Down), Enter, Esc.  
 No longer force your users to write "yes/no". Console Apps are still fun in the XXI century, but make them more user-friendly!   
 
 
 ## Features / Roadmap
-##### Tool: 
+
+#### Tool: 
 - [x] Print menu from options list 
 - [x] Call method/actions from options list
 - [ ] Add layout(header/footer) support
 - [ ] Customize style(colors, keys)
 
-##### Environment features: 
+#### Environment: 
 - [x] Add readme
 - [ ] Automate build process:
     - [x] Build on PR push
@@ -33,18 +38,18 @@ No longer force your users to write "yes/no". Console Apps are still fun in the 
 
 ### Download
 
-Latest version is available always on [www.nuget.org/.../ConsoleLauncher](https://www.nuget.org/packages/ConsoleLauncher/0.1.3-alpha)
+Latest version is available always on [www.nuget.org/.../ConsoleLauncher](https://www.nuget.org/packages/ConsoleLauncher/)
 
 
 ### Installation via nuget.org
 
-1. Install latest version
-   ```ps
-   Install-Package ConsoleLauncher
-   ```
+Install latest version
+```ps
+Install-Package ConsoleLauncher
+```
 *Until project is still released as preview version, please provide specific version, eg:*
 ```ps
-Install-Package ConsoleLauncher -Version 0.1.3-alpha
+Install-Package ConsoleLauncher -Version 0.x.x-alpha
 ```
 
 
@@ -73,11 +78,9 @@ _For more examples, please refer to the [ConsoleLauncher.Sample](https://github.
 
 ## Screenshots
 
-
 > TBD
 
 
 ## Contact
-
 
 Created by [Jakub Gramburg (@Jacup)](https://github.com/Jacup) - feel free to contact me!
