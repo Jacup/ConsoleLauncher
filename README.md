@@ -25,6 +25,7 @@ No longer force your users to write "yes/no". Console Apps are still fun in the 
 - [x] Call method/actions from options list
 - [ ] Add layout(header/footer) support
 - [ ] Customize style(colors, keys)
+- [ ] Unit tests
 
 #### Environment: 
 - [x] Add readme
