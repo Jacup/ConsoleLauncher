@@ -5,6 +5,13 @@
     /// </summary>
     public class Launcher
     {
+        private static Layout? layout;
+
+        public static void SetLayout(Field header, Field footer)
+        {
+            layout = new Layout(header, footer);
+        }
+
         /// <summary>
         /// Initializes user-friendly, console menu that
         /// allow user to use arrows to navigate thru menu options.
@@ -64,7 +71,7 @@
         private static void GenerateView(List<Option> options, int pointer)
         {
             Console.Clear();
-
+            PrintHeader();
             for (int i = 0; i < options.Count; i++)
             {
                 if (pointer == i)
@@ -80,6 +87,14 @@
 
                 Console.WriteLine($"  " + options[i].Name);
             }
+        }
+
+        private static void PrintHeader()
+        {
+            Console.Write((Char)(13) + layout.Header.Left);
+
+            Console.SetCursorPosition(Console.WindowWidth - layout.Header.Right.Length, Console.CursorTop);
+            Console.Write(layout.Header.Right);
         }
 
         private static ConsoleKeyInfo GetAction()

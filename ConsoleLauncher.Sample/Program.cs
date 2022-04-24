@@ -2,8 +2,12 @@
 {
     public static class Program
     {
+
         public static void Main()
         {
+
+            Start();
+
             List<Option> options = new()
             {
                 new Option("Submenu", Submenu),
@@ -14,6 +18,14 @@
             };
 
             Launcher.Menu(options);
+        }
+
+        private static void Start()
+        {
+            var header = Layout.CreateHeader("topleft", "topright");
+            var footer = Layout.CreateFooter("left", "right");
+            Launcher.SetLayout(header, footer);
+
         }
 
         private static void Submenu()
