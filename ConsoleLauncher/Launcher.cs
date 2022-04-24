@@ -10,26 +10,30 @@
         /// allow user to use arrows to navigate thru menu options.
         /// </summary>
         /// <param name="options">List of options to show in menu.</param>
-        /// <returns>Position of selected option as integer. </returns>
-        public static int Menu(List<string> options)
+        public static void Menu(List<Option> options)
         {
-            var pointer = 0;
-            var isSelected = false;
+            ConsoleKeyInfo keyAction;
+            int pointer = 0;
+
             if (options.Count < 1)
             {
-                throw new NotImplementedException("Options list contains no elements!");
+                throw new NotImplementedException("Option list contains no elements!");
             }
 
-            while (!isSelected)
+            do
             {
                 GenerateView(options, pointer);
 
-                var action = GetAction();
+                keyAction = GetAction();
 
-                switch (action.Key)
+                switch (keyAction.Key)
                 {
                     case ConsoleKey.Enter:
-                        isSelected = true;
+                        if (options[pointer].Action != null)
+                        {
+                            options[pointer].Action.Invoke();
+                        }
+
                         break;
                     case ConsoleKey.PageUp:
                     case ConsoleKey.UpArrow:
@@ -49,16 +53,15 @@
                         break;
                 }
             }
-
-            return pointer;
+            while (keyAction.Key != ConsoleKey.Escape);
         }
 
         /// <summary>
-        /// Generate view of provied options options with one highlited entry..
+        /// Generate view of provied options with one highlited entry..
         /// </summary>
         /// <param name="options">List of entries to print in menu.</param>
         /// <param name="pointer">Highlighted entry pointer.</param>
-        private static void GenerateView(List<string> options, int pointer)
+        private static void GenerateView(List<Option> options, int pointer)
         {
             Console.Clear();
 
@@ -69,19 +72,18 @@
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.Black;
 
-                    Console.WriteLine($" > " + options[i]);
+                    Console.WriteLine($"> " + options[i].Name);
 
                     Console.ResetColor();
                     continue;
                 }
 
-                Console.WriteLine($"   " + options[i]);
+                Console.WriteLine($"  " + options[i].Name);
             }
         }
 
         private static ConsoleKeyInfo GetAction()
         {
-            Console.WriteLine("\nUse arrows to navigate. Enter to select and option.");
             return Console.ReadKey();
         }
     }
