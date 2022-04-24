@@ -12,7 +12,7 @@
                 new Option("Empty option 2"),
                 new Option("Exit", () => Environment.Exit(0)),
             };
-            new Option("sad", )
+
             Launcher.Menu(options);
         }
 
