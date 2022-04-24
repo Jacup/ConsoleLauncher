@@ -18,7 +18,7 @@
 
         private static void Submenu()
         {
-            List<Option>? options = new()
+            List<Option> options = new()
             {
                 new Option("Option 1", Option1),
                 new Option("Go back", Main),
