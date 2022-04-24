@@ -2,67 +2,37 @@
 {
     public static class Program
     {
-        /// <summary>
-        /// Main method.
-        /// </summary>
         public static void Main()
         {
-            bool exit = false;
-            List<string> optionList = new()
+            List<Option> options = new()
             {
-                "Submenu",
-                "Option 1",
-                "Exit",
+                new Option("Submenu", Submenu),
+                new Option("Option 1 as action", Option1),
+                new Option("Option 1 as method", () => Option1()),
+                new Option("Empty option 2"),
+                new Option("Exit", () => Environment.Exit(0)),
             };
-
-            while (!exit)
-            {
-                var value = Launcher.Menu(optionList);
-
-                switch (value)
-                {
-                    case 0:
-                        Submenu(out exit);
-                        break;
-                    case 1:
-                        Console.WriteLine($"Entering {optionList[0]}");
-                        Console.ReadLine();
-                        break;
-                    case 2:
-                        Console.WriteLine("Closing app");
-                        exit = true;
-                        break;
-                }
-            }
+            new Option("sad", )
+            Launcher.Menu(options);
         }
 
-        private static void Submenu(out bool exit)
+        private static void Submenu()
         {
-            exit = false;
-            List<string> optionList = new()
+            List<Option>? options = new()
             {
-                "Action 1",
-                "Go back",
-                "Exit",
+                new Option("Option 1", Option1),
+                new Option("Go back", Main),
+                new Option("Exit", () => Environment.Exit(0)),
             };
 
-            var value = Launcher.Menu(optionList);
+            Launcher.Menu(options);
+        }
 
-            switch (value)
-            {
-                case 0:
-                    Console.WriteLine("some action ...");
-                    Console.ReadLine();
-                    break;
-                case 1:
-                    Console.WriteLine("Returning to main menu.\n Enter key to continue...");
-                    Console.ReadLine();
-                    break;
-                case 2:
-                    Console.WriteLine("Closing app");
-                    exit = true;
-                    break;
-            }
+        private static void Option1()
+        {
+            Console.Clear();
+            Console.WriteLine($"Entered Option 1");
+            Console.ReadLine();
         }
     }
 }
