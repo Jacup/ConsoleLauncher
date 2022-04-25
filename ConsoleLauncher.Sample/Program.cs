@@ -23,7 +23,7 @@
         private static void Setup()
         {
             // setup header
-            Header.HeaderVisible = false;
+            Header.HeaderVisible = true;
             Header.Title = "My own title";
         }
 
