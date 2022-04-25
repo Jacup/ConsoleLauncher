@@ -23,8 +23,12 @@
         private static void Setup()
         {
             // setup header
-            Header.HeaderVisible = true;
+            Header.IsVisible = true;
             Header.Title = "My own title";
+
+            // setup footer
+            Footer.IsVisible = true;
+            Footer.Left = "My left footer!";
         }
 
         private static void Submenu()

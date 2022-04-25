@@ -73,12 +73,18 @@
         {
             Console.Clear();
             Console.CursorVisible = false;
-            if (Header.HeaderVisible == true)
+
+            if (Header.IsVisible)
             {
                 PrintHeader();
             }
 
             PrintBody(options, pointer);
+
+            if (Footer.IsVisible)
+            {
+                PrintFooter();
+            }
         }
 
         private static void PrintBody(List<Option> options, int pointer)
@@ -113,6 +119,21 @@
             }
 
             Console.WriteLine();
+        }
+
+        private static void PrintFooter()
+        {
+            if (Footer.Left.Length > 0)
+            {
+                Console.SetCursorPosition(Console.CursorLeft, Console.WindowTop + Console.WindowHeight - 1);
+                Console.Write(Footer.Left);
+            }
+
+            if (Footer.Right.Length > 0)
+            {
+                Console.SetCursorPosition(Console.WindowWidth - Footer.Right.Length, Console.WindowTop + Console.WindowHeight - 1);
+                Console.Write(Footer.Right);
+            }
         }
     }
 }

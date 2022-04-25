@@ -9,7 +9,7 @@
 
         static Header()
         {
-            HeaderVisible = false;
+            IsVisible = false;
             Title = ProcessName;
             ClockVisible = true;
             TimeFormat = "h:mm tt";
@@ -18,7 +18,7 @@
         /// <summary>
         /// Gets or sets a value indicating whether the header is visible.
         /// </summary>
-        public static bool HeaderVisible { get; set; }
+        public static bool IsVisible { get; set; }
 
         /// <summary>
         /// Gets or sets customizable title. By default = project name.
