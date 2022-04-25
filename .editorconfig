@@ -2,3 +2,6 @@
 
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = none
+
+# CS8602: Dereference of a possibly null reference.
+dotnet_diagnostic.CS8602.severity = none
