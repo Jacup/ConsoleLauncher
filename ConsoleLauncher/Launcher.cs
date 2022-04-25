@@ -71,6 +71,7 @@
         private static void GenerateView(List<Option> options, int pointer)
         {
             Console.Clear();
+            Console.WriteLine();
             PrintHeader();
             for (int i = 0; i < options.Count; i++)
             {
@@ -91,7 +92,7 @@
 
         private static void PrintHeader()
         {
-            Console.Write((Char)(13) + layout.Header.Left);
+            Console.Write((Char)13 + layout.Header.Left);
 
             Console.SetCursorPosition(Console.WindowWidth - layout.Header.Right.Length, Console.CursorTop);
             Console.Write(layout.Header.Right);
@@ -99,7 +100,7 @@
 
         private static ConsoleKeyInfo GetAction()
         {
-            return Console.ReadKey();
+            return Console.ReadKey(true);
         }
     }
 }
