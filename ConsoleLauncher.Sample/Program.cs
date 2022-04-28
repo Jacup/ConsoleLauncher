@@ -4,6 +4,7 @@
 
     public static class Program
     {
+        private static bool isLayoutEnabled = false;
         public static void Main()
         {
             Setup();
@@ -11,6 +12,7 @@
             List<Option> options = new()
             {
                 new Option("Submenu", Submenu),
+                new Option("Enable/Disable layout", EnableDisableLayout),
                 new Option("Option 1 as action", Option1),
                 new Option("Option 1 as method call", () => Option1()),
                 new Option("Empty option 2"),
@@ -20,15 +22,32 @@
             Launcher.Menu(options);
         }
 
+        private static void EnableDisableLayout()
+        {
+            if (isLayoutEnabled)
+            {
+                Header.IsVisible = false;
+
+                Footer.IsVisible = false;
+
+                isLayoutEnabled = false;
+            }
+            else
+            {
+                // setup header
+                Header.IsVisible = true;
+                //Header.Title = "My own title";
+
+                // setup footer
+                Footer.IsVisible = true;
+                Footer.Left = "My left footer!";
+                isLayoutEnabled = true;
+            }
+        }
+
         private static void Setup()
         {
-            // setup header
-            Header.IsVisible = true;
-            Header.Title = "My own title";
-
-            // setup footer
-            Footer.IsVisible = true;
-            Footer.Left = "My left footer!";
+            Header.TitleColors = (ConsoleColor.Yellow, ConsoleColor.Blue);
         }
 
         private static void Submenu()

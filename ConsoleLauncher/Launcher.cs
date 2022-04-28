@@ -14,6 +14,8 @@
         /// <param name="options">List of options to show in menu.</param>
         public static void Menu(List<Option> options)
         {
+            Settings.GetDefaults();
+
             if (options.Count < 1)
             {
                 throw new NotImplementedException("Option list contains no elements!");
@@ -108,8 +110,7 @@
 
         private static void PrintHeader()
         {
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-            Console.Write(Header.Title);
+            Header.WriteTitle();
 
             if (Header.ClockVisible)
             {
