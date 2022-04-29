@@ -1,13 +1,26 @@
 ﻿namespace ConsoleLauncher.Layout
 {
+    /// <summary>
+    /// Global ConsoleLauncher settings.
+    /// </summary>
     public static class Settings
     {
-        internal static ConsoleColor DefaultBackgroundColor = Console.BackgroundColor;
-        internal static ConsoleColor DefaultForegroundColor = Console.ForegroundColor;
+        private static bool defaultsSet;
 
-        private static bool defaultsSet = false;
+        /// <summary>
+        /// Gets default background color.
+        /// </summary>
+        internal static ConsoleColor DefaultBackgroundColor { get; private set; } = Console.BackgroundColor;
 
-        public static void GetDefaults()
+        /// <summary>
+        /// Gets default foreground(font) color.
+        /// </summary>
+        internal static ConsoleColor DefaultForegroundColor { get; private set; } = Console.ForegroundColor;
+
+        /// <summary>
+        /// Method to save default settings of console.
+        /// </summary>
+        internal static void GetDefaults()
         {
             if (!defaultsSet)
             {
@@ -17,6 +30,5 @@
                 defaultsSet = true;
             }
         }
-
     }
 }
