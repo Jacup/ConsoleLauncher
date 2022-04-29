@@ -56,7 +56,7 @@
             internal static void WriteTitle()
             {
                 SetPosition();
-                SetColors();
+                Settings.SetColors(Colors);
 
                 Console.Write(Text);
                 Console.ResetColor();
@@ -72,19 +72,6 @@
                 else if (TitlePosition == Position.Left)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                }
-            }
-
-            private static void SetColors()
-            {
-                if (Colors.Background != Settings.DefaultBackgroundColor)
-                {
-                    Console.BackgroundColor = Colors.Background;
-                }
-
-                if (Colors.Foreground != Settings.DefaultForegroundColor)
-                {
-                    Console.ForegroundColor = Colors.Foreground;
                 }
             }
         }

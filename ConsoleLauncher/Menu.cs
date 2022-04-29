@@ -89,7 +89,8 @@
             {
                 if (pointer == i)
                 {
-                    SetHighlitedColors();
+                    Settings.SetColors(HighlitedEntryColors);
+
                     Console.WriteLine($"> " + options[i].Name);
 
                     Console.ResetColor();
@@ -98,12 +99,6 @@
 
                 Console.WriteLine($"  " + options[i].Name);
             }
-        }
-
-        private static void SetHighlitedColors()
-        {
-            Console.BackgroundColor = HighlitedEntryColors.Background;
-            Console.ForegroundColor = HighlitedEntryColors.Foreground;
         }
     }
 }

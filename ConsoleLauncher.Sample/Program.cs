@@ -24,9 +24,10 @@
 
         private static void ChangeColors()
         {
-            Header.Title.Colors = (ConsoleColor.Yellow, ConsoleColor.Blue);
-            Header.Clock.Colors = (ConsoleColor.Yellow, ConsoleColor.Blue);
-            Menu.HighlitedEntryColors = (ConsoleColor.Red, ConsoleColor.Yellow);
+            Header.Title.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Header.Clock.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Footer.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Menu.HighlitedEntryColors = (ConsoleColor.Red, ConsoleColor.Black);
         }
 
         private static void EnableDisableLayout()

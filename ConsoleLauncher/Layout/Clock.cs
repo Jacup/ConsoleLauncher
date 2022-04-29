@@ -42,23 +42,10 @@
                 {
                     var formattedTime = GetFormattedTime();
                     Console.SetCursorPosition(Console.WindowWidth - formattedTime.Length, Console.CursorTop);
-                    SetColors();
+                    Settings.SetColors(Colors);
 
                     Console.Write(formattedTime);
                     Console.ResetColor();
-                }
-            }
-
-            private static void SetColors()
-            {
-                if (Colors.Background != Settings.DefaultBackgroundColor)
-                {
-                    Console.BackgroundColor = Colors.Background;
-                }
-
-                if (Colors.Foreground != Settings.DefaultForegroundColor)
-                {
-                    Console.ForegroundColor = Colors.Foreground;
                 }
             }
 

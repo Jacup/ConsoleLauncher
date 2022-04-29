@@ -30,5 +30,18 @@
                 defaultsSet = true;
             }
         }
+
+        internal static void SetColors((ConsoleColor Background, ConsoleColor Foreground) colors)
+        {
+            if (colors.Background != Settings.DefaultBackgroundColor)
+            {
+                Console.BackgroundColor = colors.Background;
+            }
+
+            if (colors.Foreground != Settings.DefaultForegroundColor)
+            {
+                Console.ForegroundColor = colors.Foreground;
+            }
+        }
     }
 }
