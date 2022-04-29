@@ -24,6 +24,7 @@
                 throw new NotImplementedException("Option list contains no elements!");
             }
 
+            Console.CursorVisible = false;
             ConsoleKeyInfo keyAction;
             int pointer = 0;
 
@@ -69,21 +70,11 @@
             return pointer;
         }
 
-        /// <summary>
-        /// Generate view of provied options with one highlited entry..
-        /// </summary>
-        /// <param name="options">List of entries to print in menu.</param>
-        /// <param name="pointer">Highlighted entry pointer.</param>
         private static void GenerateView(List<Option> options, int pointer)
         {
             Console.Clear();
-            Console.CursorVisible = false;
 
-            if (Header.IsVisible)
-            {
-                Header.PrintHeader();
-            }
-
+            Header.PrintHeader();
             PrintBody(options, pointer);
 
             if (Footer.IsVisible)

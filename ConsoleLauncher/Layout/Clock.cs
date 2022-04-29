@@ -1,25 +1,26 @@
 ﻿namespace ConsoleLauncher.Layout
 {
     /// <summary>
-    /// Header.
+    /// Header used to be printed at top of the screen.
     /// </summary>
     public static partial class Header
     {
         /// <summary>
-        /// Clock class.
+        /// Clock displayed in the header.
         /// </summary>
         public static partial class Clock
         {
             static Clock()
             {
-                ClockVisible = true;
+                IsVisible = true;
                 TimeFormat = "h:mm tt";
             }
 
             /// <summary>
             /// Gets or sets a value indicating whether the clock is visible. Default = true.
             /// </summary>
-            public static bool ClockVisible { get; set; }
+            /// <returns>true if the clock is visible; otherwise, false.</returns>
+            public static bool IsVisible { get; set; }
 
             /// <summary>
             /// Gets or sets time display format. Default = "h:mm tt".
@@ -37,7 +38,7 @@
             /// </summary>
             internal static void WriteClock()
             {
-                if (ClockVisible)
+                if (IsVisible)
                 {
                     var formattedTime = GetFormattedTime();
                     Console.SetCursorPosition(Console.WindowWidth - formattedTime.Length, Console.CursorTop);

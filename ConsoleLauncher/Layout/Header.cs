@@ -1,18 +1,16 @@
 ﻿namespace ConsoleLauncher.Layout
 {
     /// <summary>
-    /// Header used to print at top of the screen.
+    /// Header used to be printed at top of the screen.
     /// </summary>
     public static partial class Header
     {
-        static Header()
-        {
-            IsVisible = false;
-        }
+        static Header() => IsVisible = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether the header is visible.
         /// </summary>
+        /// <returns>true if the header is visible; otherwise, false.</returns>
         public static bool IsVisible { get; set; }
 
         /// <summary>
@@ -20,10 +18,13 @@
         /// </summary>
         internal static void PrintHeader()
         {
-            Title.WriteTitle();
-            Clock.WriteClock();
+            if (IsVisible)
+            {
+                Title.WriteTitle();
+                Clock.WriteClock();
 
-            Console.WriteLine();
+                Console.WriteLine();
+            }
         }
     }
 }
