@@ -31,6 +31,10 @@
             }
         }
 
+        /// <summary>
+        /// Method that set current ConsoleColors to provided in parameters.
+        /// </summary>
+        /// <param name="colors">ConsoleColors to set as tuple (background, foreground).</param>
         internal static void SetColors((ConsoleColor Background, ConsoleColor Foreground) colors)
         {
             if (colors.Background != Settings.DefaultBackgroundColor)
