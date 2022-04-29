@@ -11,6 +11,8 @@
             List<Option> options = new()
             {
                 new Option("Submenu", Submenu),
+                new Option("Enable/Disable layout", EnableDisableLayout),
+                new Option("Make me colorful!", ChangeColors),
                 new Option("Option 1 as action", Option1),
                 new Option("Option 1 as method call", () => Option1()),
                 new Option("Empty option 2"),
@@ -20,15 +22,30 @@
             Launcher.Menu(options);
         }
 
+        private static void ChangeColors()
+        {
+            Header.Title.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Header.Clock.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Footer.Colors = (ConsoleColor.Black, ConsoleColor.Red);
+            Menu.HighlitedEntryColors = (ConsoleColor.Red, ConsoleColor.Black);
+        }
+
+        private static void EnableDisableLayout()
+        {
+            if (!Header.IsVisible || !Footer.IsVisible)
+            {
+                Header.IsVisible = true;
+                Footer.IsVisible = true;
+            }
+            else
+            {
+                Header.IsVisible = false;
+                Footer.IsVisible = false;
+            }
+        }
+
         private static void Setup()
         {
-            // setup header
-            Header.IsVisible = true;
-            Header.Title = "My own title";
-
-            // setup footer
-            Footer.IsVisible = true;
-            Footer.Left = "My left footer!";
         }
 
         private static void Submenu()

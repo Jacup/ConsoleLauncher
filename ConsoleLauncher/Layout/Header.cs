@@ -1,38 +1,30 @@
 ﻿namespace ConsoleLauncher.Layout
 {
     /// <summary>
-    /// Header used to print at top of the screen.
+    /// Header used to be printed at top of the screen.
     /// </summary>
-    public static class Header
+    public static partial class Header
     {
-        private static readonly string ProcessName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-
-        static Header()
-        {
-            IsVisible = false;
-            Title = ProcessName;
-            ClockVisible = true;
-            TimeFormat = "h:mm tt";
-        }
+        static Header() => IsVisible = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether the header is visible.
         /// </summary>
+        /// <returns>true if the header is visible; otherwise, false.</returns>
         public static bool IsVisible { get; set; }
 
         /// <summary>
-        /// Gets or sets customizable title. By default = project name.
+        /// Print whole header.
         /// </summary>
-        public static string Title { get; set; }
+        internal static void PrintHeader()
+        {
+            if (IsVisible)
+            {
+                Title.WriteTitle();
+                Clock.WriteClock();
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the clock is visible. Default = true.
-        /// </summary>
-        public static bool ClockVisible { get; set; }
-
-        /// <summary>
-        /// Gets or sets time display format. Default = "h:mm tt".
-        /// </summary>
-        public static string TimeFormat { get; set; }
+                Console.WriteLine();
+            }
+        }
     }
 }

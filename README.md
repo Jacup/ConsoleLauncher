@@ -1,6 +1,6 @@
 # ConsoleLauncher [![build](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml)
 
-> ConsoleLaucher is simple tool for your .NET console application. ConsoleLauncher helps you to create useful and user-friedly navigation menu in  just two steps.
+> ConsoleLaucher is simple tool for your .NET console application. ConsoleLauncher helps you to create useful and user-friedly navigation menu in just two steps.
 
 
 ## Table of Contents
@@ -15,7 +15,8 @@
 ## General Information
 
 **ConsoleLauncher** is a .NET tool, that helps you to create simply, user-friendly console menu. Navigation is handled by using Arrows (alt. PgUp/Down), Enter, Esc.  
-No longer force your users to write "yes/no". Console Apps are still fun in the XXI century, but make them more user-friendly!   
+No longer force your users to write "yes/no". 
+One day, I think ConsoleLauncher could be named as framework, but now it is just simple tool. ;> 
 
 
 ## Features / Roadmap
@@ -23,8 +24,8 @@ No longer force your users to write "yes/no". Console Apps are still fun in the 
 #### Tool: 
 - [x] Print menu from options list 
 - [x] Call method/actions from options list
-- [ ] Add layout(header/footer) support
-- [ ] Customize style(colors, keys)
+- [x] Add layout(header/footer) support
+- [x] Customize colors
 - [ ] Unit tests
 
 #### Environment: 
