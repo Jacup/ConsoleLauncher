@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleLauncher.Layout
+﻿namespace ConsoleLauncher.Layout
 {
     public static class Settings
     {
-        public static ConsoleColor DefaultBackgroundColor = Console.BackgroundColor;
-        public static ConsoleColor DefaultForegroundColor = Console.ForegroundColor;
+        internal static ConsoleColor DefaultBackgroundColor = Console.BackgroundColor;
+        internal static ConsoleColor DefaultForegroundColor = Console.ForegroundColor;
+
+        private static bool defaultsSet = false;
 
         public static void GetDefaults()
         {
-            DefaultBackgroundColor = Console.BackgroundColor;
-            DefaultForegroundColor = Console.ForegroundColor;
+            if (!defaultsSet)
+            {
+                DefaultBackgroundColor = Console.BackgroundColor;
+                DefaultForegroundColor = Console.ForegroundColor;
+
+                defaultsSet = true;
+            }
         }
+
     }
 }

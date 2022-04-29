@@ -4,7 +4,6 @@
 
     public static class Program
     {
-        private static bool isLayoutEnabled = false;
         public static void Main()
         {
             Setup();
@@ -13,6 +12,7 @@
             {
                 new Option("Submenu", Submenu),
                 new Option("Enable/Disable layout", EnableDisableLayout),
+                new Option("Make me colorful!", ChangeColors),
                 new Option("Option 1 as action", Option1),
                 new Option("Option 1 as method call", () => Option1()),
                 new Option("Empty option 2"),
@@ -22,32 +22,29 @@
             Launcher.Menu(options);
         }
 
+        private static void ChangeColors()
+        {
+            Header.Title.Colors = (ConsoleColor.Yellow, ConsoleColor.Blue);
+            Header.Clock.Colors = (ConsoleColor.Yellow, ConsoleColor.Blue);
+            Menu.HighlitedEntryColors = (ConsoleColor.Red, ConsoleColor.Yellow);
+        }
+
         private static void EnableDisableLayout()
         {
-            if (isLayoutEnabled)
+            if (!Header.IsVisible || !Footer.IsVisible)
             {
-                Header.IsVisible = false;
-
-                Footer.IsVisible = false;
-
-                isLayoutEnabled = false;
+                Header.IsVisible = true;
+                Footer.IsVisible = true;
             }
             else
             {
-                // setup header
-                Header.IsVisible = true;
-                //Header.Title = "My own title";
-
-                // setup footer
-                Footer.IsVisible = true;
-                Footer.Left = "My left footer!";
-                isLayoutEnabled = true;
+                Header.IsVisible = false;
+                Footer.IsVisible = false;
             }
         }
 
         private static void Setup()
         {
-            Header.TitleColors = (ConsoleColor.Yellow, ConsoleColor.Blue);
         }
 
         private static void Submenu()

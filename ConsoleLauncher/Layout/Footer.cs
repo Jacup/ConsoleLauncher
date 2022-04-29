@@ -28,5 +28,21 @@
         /// Gets or sets a string printed on the right side of window. Default = navigating helper.
         /// </summary>
         public static string Right { get; set; }
+
+        internal static void PrintFooter()
+        {
+            if (Left.Length > 0)
+            {
+                Console.SetCursorPosition(Console.CursorLeft, Console.WindowTop + Console.WindowHeight - 1);
+                Console.Write(Left);
+            }
+
+            if (Right.Length > 0)
+            {
+                Console.SetCursorPosition(Console.WindowWidth - Right.Length, Console.WindowTop + Console.WindowHeight - 1);
+                Console.Write(Right);
+            }
+        }
+
     }
 }
