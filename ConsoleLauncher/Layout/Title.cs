@@ -1,5 +1,7 @@
 ﻿namespace ConsoleLauncher.Layout
 {
+    using System.Diagnostics;
+
     /// <summary>
     /// Header.
     /// </summary>
@@ -10,7 +12,7 @@
         /// </summary>
         public static partial class Title
         {
-            private static readonly string ProcessName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+            private static readonly string ProcessName = Process.GetCurrentProcess().ProcessName;
 
             static Title()
             {
