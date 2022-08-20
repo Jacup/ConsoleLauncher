@@ -5,9 +5,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.4.0-alpha</Version>
+    <Version>1.0.1</Version>
     <Authors>Jakub Gramburg</Authors>
-    <Description>Tool for creating simple, user-friendly console menu, based on navigation by arrow. </Description>
+    <Description>Tool for creating simple, user-friendly console menu, based on navigation by arrows. </Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Jacup/ConsoleLauncher</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

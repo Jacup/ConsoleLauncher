@@ -1,4 +1,4 @@
-# ConsoleLauncher [![build](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml)
+# ConsoleLauncher  [![build](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Jacup/ConsoleLauncher/actions/workflows/dotnet.yml) [![build](https://github.com/Jacup/ConsoleLauncher/actions/workflows/publish.yml/badge.svg)](https://github.com/Jacup/ConsoleLauncher/actions/workflows/publish.yml)
 
 > ConsoleLaucher is simple tool for your .NET console application. ConsoleLauncher helps you to create useful and user-friedly navigation menu in just two steps.
 
@@ -8,7 +8,7 @@
 * [General Info](#general-information)
 * [Features](#features--roadmap)
 * [Get Started](#get-started)
-* [~~Screenshots~~](#screenshots)
+* [Screenshots](#screenshots)
 * [Contact](#contact)
 
 
@@ -21,14 +21,14 @@ One day, I think ConsoleLauncher could be named as framework, but now it is just
 
 ## Features / Roadmap
 
-#### Tool: 
+### Tool: 
 - [x] Print menu from options list 
 - [x] Call method/actions from options list
 - [x] Add layout(header/footer) support
 - [x] Customize colors
 - [ ] Unit tests
 
-#### Environment: 
+### Environment: 
 - [x] Add readme
 - [ ] Automate build process:
     - [x] Build on PR push
@@ -49,11 +49,6 @@ Install latest version
 ```ps
 Install-Package ConsoleLauncher
 ```
-*Until project is still released as preview version, please provide specific version, eg:*
-```ps
-Install-Package ConsoleLauncher -Version 0.x.x-alpha
-```
-
 
 ### Usage
 
@@ -80,7 +75,10 @@ _For more examples, please refer to the [ConsoleLauncher.Sample](https://github.
 
 ## Screenshots
 
-> TBD
+
+![image](https://user-images.githubusercontent.com/2371681/185755535-842dd88c-354b-44dd-ba18-69c0deca053b.png)
+
+![image](https://user-images.githubusercontent.com/2371681/185755546-b4c23e19-b34f-4b43-90f7-a3f13e24b1cf.png)
 
 
 ## Contact
