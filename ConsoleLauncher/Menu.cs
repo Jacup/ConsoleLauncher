@@ -1,104 +1,41 @@
 ﻿namespace ConsoleLauncher
 {
-    using ConsoleLauncher.Layout;
+    using ConsoleLauncher.Interfaces;
 
     /// <summary>
-    /// ConsoleLauncher Menu feature.
+    /// Printable menu with set of MenuOptions.
     /// </summary>
-    public static class Menu
+    public class Menu : IMenu
     {
         /// <summary>
-        /// Gets or sets colors of highlited menu entry.
+        /// Initializes a new instance of the <see cref="Menu"/> class.
         /// </summary>
-        public static (ConsoleColor Background, ConsoleColor Foreground) HighlitedEntryColors { get; set; } =
-    (Console.ForegroundColor, Console.BackgroundColor);
-
-        /// <summary>
-        /// Run Menu initializer.
-        /// </summary>
-        /// <param name="options">List of options to make menu.</param>
-        internal static void Run(List<Option> options)
+        internal Menu()
         {
-            if (options.Count < 1)
-            {
-                throw new NotImplementedException("Option list contains no elements!");
-            }
-
-            Console.CursorVisible = false;
-            ConsoleKeyInfo keyAction;
-            int pointer = 0;
-
-            do
-            {
-                GenerateView(options, pointer);
-
-                keyAction = Console.ReadKey(true);
-                pointer = MakeAction(options, keyAction, pointer);
-            }
-            while (keyAction.Key != ConsoleKey.Escape);
+            Items = new List<MenuItem>();
         }
 
-        private static int MakeAction(List<Option> options, ConsoleKeyInfo keyAction, int pointer)
+        /// <inheritdoc/>
+        public List<MenuItem> Items { get; private set; }
+
+        /// <inheritdoc/>
+        public IMenu AddItem(MenuItem menuItem)
         {
-            switch (keyAction.Key)
-            {
-                case ConsoleKey.Enter:
-                    if (options[pointer].Action != null)
-                    {
-                        options[pointer].Action.Invoke();
-                    }
+            Items.Add(menuItem);
 
-                    break;
-                case ConsoleKey.PageUp:
-                case ConsoleKey.UpArrow:
-                    if (pointer > 0)
-                    {
-                        pointer--;
-                    }
-
-                    break;
-                case ConsoleKey.PageDown:
-                case ConsoleKey.DownArrow:
-                    if (pointer < options.Count - 1)
-                    {
-                        pointer++;
-                    }
-
-                    break;
-            }
-
-            return pointer;
+            return this;
         }
 
-        private static void GenerateView(List<Option> options, int pointer)
+        /// <inheritdoc/>
+        public IMenu Setup()
         {
-            Console.Clear();
-
-            Header.PrintHeader();
-            PrintBody(options, pointer);
-
-            if (Footer.IsVisible)
-            {
-                Footer.PrintFooter();
-            }
+            throw new NotImplementedException();
         }
 
-        private static void PrintBody(List<Option> options, int pointer)
+        /// <inheritdoc/>
+        public void Print()
         {
-            for (int i = 0; i < options.Count; i++)
-            {
-                if (pointer == i)
-                {
-                    Settings.SetColors(HighlitedEntryColors);
-
-                    Console.WriteLine($"> " + options[i].Name);
-
-                    Console.ResetColor();
-                    continue;
-                }
-
-                Console.WriteLine($"  " + options[i].Name);
-            }
+            throw new NotImplementedException();
         }
     }
 }

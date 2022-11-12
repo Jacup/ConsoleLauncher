@@ -5,17 +5,17 @@
     /// <summary>
     /// ConsoleLauncher tool. There you can find all functionalities that ConsoleLauncher can handle.
     /// </summary>
-    public class Launcher
+    public static class Launcher
     {
+        //public static void Menu(IEnumerable<IMenuItem> options)
+        //{
+        //    Settings.GetDefaults();
+        //    ConsoleLauncher.Menu.Run(options);
+        //}
+
         /// <summary>
-        /// Initializes user-friendly, console menu that
-        /// allow user to use arrows to navigate thru menu options.
+        /// Gets Menu Factory.
         /// </summary>
-        /// <param name="options">List of options to show in menu.</param>
-        public static void Menu(List<Option> options)
-        {
-            Settings.GetDefaults();
-            ConsoleLauncher.Menu.Run(options);
-        }
+        public static Menu Menu => new();
     }
 }
