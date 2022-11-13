@@ -1,6 +1,7 @@
 ﻿namespace ConsoleLauncher
 {
     using ConsoleLauncher.Layout;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// ConsoleLauncher tool. There you can find all functionalities that ConsoleLauncher can handle.
@@ -16,6 +17,6 @@
         /// <summary>
         /// Gets Menu Factory.
         /// </summary>
-        public static Menu Menu => new();
+        public static MenuFactory Menu => new();
     }
 }
