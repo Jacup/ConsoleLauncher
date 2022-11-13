@@ -14,5 +14,10 @@
         /// Gets action of menu item.
         /// </summary>
         public Action? Action { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether item is traverserable.
+        /// </summary>
+        public bool Traverserable { get; }
     }
 }

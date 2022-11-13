@@ -11,20 +11,24 @@
         /// Initializes a new instance of the <see cref="MenuItem"/> class.
         /// </summary>
         /// <param name="name">Text to print as menu entry.</param>
-        /// <param name="action">Action performed after selecting in menu.</param>
-        public MenuItem(string name, Action action)
+        /// <param name="action">Action taken when item is choosen.</param>
+        /// <param name="traverserable">Indicates whether item is traverserable.</param>
+        public MenuItem(string name, Action action, bool traverserable = true)
         {
             Description = name;
             Action = action;
+            Traverserable = traverserable;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuItem"/> class.
         /// </summary>
         /// <param name="name">Text to print as menu entry.</param>
-        public MenuItem(string name)
+        /// <param name="traverserable">Indicates whether item is traverserable.</param>
+        public MenuItem(string name, bool traverserable = true)
         {
             Description = name;
+            Traverserable = traverserable;
         }
 
         /// <inheritdoc/>
@@ -32,5 +36,8 @@
 
         /// <inheritdoc/>
         public Action? Action { get; private set; }
+
+        /// <inheritdoc/>
+        public bool Traverserable { get; private set; }
     }
 }
