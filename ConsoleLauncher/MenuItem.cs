@@ -12,12 +12,11 @@
         /// </summary>
         /// <param name="name">Text to print as menu entry.</param>
         /// <param name="action">Action taken when item is choosen.</param>
-        /// <param name="traverserable">Indicates whether item is traverserable.</param>
-        public MenuItem(string name, Action action, bool traverserable = true)
+        public MenuItem(string name, Action action)
         {
             Description = name;
             Action = action;
-            Traverserable = traverserable;
+            IsTraverserable = true;
         }
 
         /// <summary>
@@ -28,7 +27,7 @@
         public MenuItem(string name, bool traverserable = true)
         {
             Description = name;
-            Traverserable = traverserable;
+            IsTraverserable = traverserable;
         }
 
         /// <inheritdoc/>
@@ -38,6 +37,6 @@
         public Action? Action { get; private set; }
 
         /// <inheritdoc/>
-        public bool Traverserable { get; private set; }
+        public bool IsTraverserable { get; private set; }
     }
 }

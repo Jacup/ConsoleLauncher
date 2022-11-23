@@ -5,7 +5,7 @@
     /// <summary>
     /// Printable menu with set of MenuItems.
     /// </summary>
-    public class MenuFactory : IMenuFactory
+    public class MenuFactory : IMenu
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuFactory"/> class.
@@ -27,10 +27,20 @@
         /// <inheritdoc/>
         public List<MenuItem> Items { get; private set; }
 
-        private static (ConsoleColor Background, ConsoleColor Foreground) HighlitedEntryColors { get; set; } = (Console.ForegroundColor, Console.BackgroundColor);
+        /// <inheritdoc/>
+        public (ConsoleColor Background, ConsoleColor Foreground) HighlitedItemColors { get; private set; }
 
         /// <inheritdoc/>
-        public IMenuFactory AddItem(MenuItem menuItem)
+        public bool CustomHighlitedItem { get; private set; }
+
+        /// <inheritdoc/>
+        public short Pointer { get; private set; }
+
+        /// <inheritdoc/>
+        public bool PointerSet { get; private set; }
+
+        /// <inheritdoc/>
+        public IMenu AddItem(MenuItem menuItem)
         {
             Items.Add(menuItem);
 
@@ -38,13 +48,13 @@
         }
 
         /// <inheritdoc/>
-        public IMenuFactory Setup()
+        public IMenu Setup()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public IMenuFactory AddExitItem()
+        public IMenu AddExitItem()
         {
             ExitItemFlag = true;
 
@@ -52,7 +62,7 @@
         }
 
         /// <inheritdoc/>
-        public IMenuFactory AddReturnItem()
+        public IMenu AddReturnItem()
         {
             ReturnItemFlag = true;
 
@@ -60,22 +70,56 @@
         }
 
         /// <inheritdoc/>
-        public IMenuFactory Build()
+        public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
-            if (ReturnItemFlag)
+            HighlitedItemColors = (backgroundColor, fontColor);
+            CustomHighlitedItem = true;
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IMenu SetPointer(short index)
+        {
+            if (Items.ElementAtOrDefault(index) == null)
+                throw new ArgumentException($"Item at index {index} does not exists.", nameof(index));
+            if (!Items.ElementAt(index).IsTraverserable)
+                throw new ArgumentException($"Item at index {index} is not traverserable.", nameof(index));
+
+            Pointer = index;
+            PointerSet = true;
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IMenu Build()
+        {
+            if (IsBuilded)
+                return this;
+
+            if (ReturnItemFlag && !Items.Any(item => item.Description.Equals("Return")))
                 Items.Add(new("Return", () => { return; }));
-            if (ExitItemFlag)
+
+            if (ExitItemFlag && !Items.Any(item => item.Description.Equals("Exit")))
                 Items.Add(new("Exit", () => Environment.Exit(0)));
+
+            if (!CustomHighlitedItem)
+                HighlitedItemColors = GetDefaultHighlitedColors();
+
+            if (!PointerSet)
+                Pointer = MenuActions.GetFirstTraverserableMenuItemIndex(Items);
 
             IsBuilded = true;
 
             return this;
         }
 
-        /// <inheritdoc/>
-        public void Print()
+        private static (ConsoleColor Background, ConsoleColor Foreground) GetDefaultHighlitedColors() // TODO: FIX
         {
-            _ = new MenuWriter(this);
+            return (ConsoleColor.White, ConsoleColor.Black);
         }
+
+        /// <inheritdoc/>
+        public void Print() => MenuActions.Print(this);
     }
 }
