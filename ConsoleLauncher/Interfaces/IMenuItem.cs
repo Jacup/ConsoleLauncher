@@ -18,6 +18,6 @@
         /// <summary>
         /// Gets a value indicating whether item is traverserable.
         /// </summary>
-        public bool Traverserable { get; }
+        public bool IsTraverserable { get; }
     }
 }
