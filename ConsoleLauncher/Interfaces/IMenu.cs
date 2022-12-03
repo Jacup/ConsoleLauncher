@@ -11,14 +11,14 @@
         internal List<MenuItem> Items { get; }
 
         /// <summary>
-        /// Gets pointer.
+        /// Gets current index.
         /// </summary>
-        public short Pointer { get; }
+        public short Index { get; }
 
         /// <summary>
-        /// Gets a value indicating whether custom pointer was set.
+        /// Gets a value indicating whether index is set.
         /// </summary>
-        public bool PointerSet { get; }
+        public bool IndexSetFlag { get; }
 
         /// <summary>
         /// Gets a value indicating whether exit item should be added.
@@ -33,12 +33,22 @@
         /// <summary>
         /// Gets colors of highlited menu item.
         /// </summary>
-        public (ConsoleColor Background, ConsoleColor Foreground) HighlitedItemColors { get; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? HighlitedItemColors { get; }
 
         /// <summary>
-        /// Gets a value indicating whether custom colors for highlited item are set.
+        /// Gets colors of highlited menu item.
         /// </summary>
-        public bool CustomHighlitedItem { get; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? ItemColors { get; }
+
+        /// <summary>
+        /// Gets colors of highlited menu item.
+        /// </summary>
+        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraverserableItemColors { get; }
+
+        /// <summary>
+        /// Gets character used as pointer.
+        /// </summary>
+        public char? PointerCharacter { get; }
 
         /// <summary>
         /// Gets a value indicating whether menu is builded.
@@ -49,25 +59,25 @@
         /// Adds an item to current Menu.
         /// </summary>
         /// <param name="menuItem">Item to add.</param>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu AddItem(MenuItem menuItem);
 
         /// <summary>
         /// Adds an item to current Menu.
         /// </summary>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu AddExitItem();
 
         /// <summary>
         /// Adds an item to current Menu that returns in menu.
         /// </summary>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu AddReturnItem();
 
         /// <summary>
         /// Allows to set options of displayed menu.
         /// </summary>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu Setup();
 
         /// <summary>
@@ -75,13 +85,36 @@
         /// </summary>
         /// <param name="backgroundColor">Color to be set as background color.</param>
         /// <param name="fontColor">Color to be sent as font color.</param>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
+
+        /// <summary>
+        /// Set colors for menu items. Overrides global settings.
+        /// </summary>
+        /// <param name="backgroundColor">Color to be set as background color.</param>
+        /// <param name="fontColor">Color to be sent as font color.</param>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
+        public IMenu SetItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
+
+        /// <summary>
+        /// Set colors for non traverserable menu items. Overrides global settings.
+        /// </summary>
+        /// <param name="backgroundColor">Color to be set as background color.</param>
+        /// <param name="fontColor">Color to be sent as font color.</param>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
+        public IMenu SetNonTraverserableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
+
+        /// <summary>
+        /// Set colors for highlited menu item. Overrides global settings.
+        /// </summary>
+        /// <param name="pointer">Character to be used as pointer.</param>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
+        public IMenu SetPointerCharacter(char pointer);
 
         /// <summary>
         /// Builds current menu.
         /// </summary>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu Build();
 
         /// <summary>
@@ -90,11 +123,11 @@
         public void Print();
 
         /// <summary>
-        /// Sets pointer at <paramref name="index"/>.
+        /// Sets pointer at <paramref name="index"/>. By default, pointer will be set to first traversable item.
         /// </summary>
         /// <param name="index">Index to be set pointer at.</param>
-        /// <returns>Current menu.</returns>
+        /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         /// <exception cref="ArgumentException">Thrown if item at <paramref name="index"/> is not traverserable.</exception>
-        internal IMenu SetPointer(short index);
+        internal IMenu SetIndex(short index);
     }
 }

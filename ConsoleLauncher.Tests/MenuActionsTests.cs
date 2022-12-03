@@ -247,7 +247,7 @@
                 .AddItem(new("One"))
                 .AddItem(new("Two"))
                 .AddItem(new("Three"))
-                .SetPointer(2)
+                .SetIndex(2)
                 .Build();
 
             short expectedPointer = 2;
@@ -290,7 +290,7 @@
                 .AddItem(new("One"))
                 .AddItem(new("Two", false))
                 .AddItem(new("Three"))
-                .SetPointer(2)
+                .SetIndex(2)
                 .Build();
 
             short expectedPointer = 0;
@@ -310,7 +310,7 @@
                 .AddItem(new("One"))
                 .AddItem(new("Two"))
                 .AddItem(new("Three"))
-                .SetPointer(2)
+                .SetIndex(2)
                 .Build();
 
             short expectedPointer = 1;
@@ -330,7 +330,7 @@
                 .AddItem(new("One", false))
                 .AddItem(new("Two", false))
                 .AddItem(new("Three"))
-                .SetPointer(2)
+                .SetIndex(2)
                 .Build();
 
             short expectedPointer = 2;
@@ -362,6 +362,5 @@
         }
 
         #endregion
-
     }
 }

@@ -1,69 +1,54 @@
 ﻿namespace ConsoleLauncher.Sample
 {
     using ConsoleLauncher.Layout;
+    using System.Net.Http.Headers;
 
-    public static class Program
+    internal class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
-            Setup();
 
-            List<Option> options = new()
-            {
-                new Option("Submenu", Submenu),
-                new Option("Enable/Disable layout", EnableDisableLayout),
-                new Option("Make me colorful!", ChangeColors),
-                new Option("Option 1 as action", Option1),
-                new Option("Option 1 as method call", () => Option1()),
-                new Option("Empty option 2"),
-                new Option("Exit", () => Environment.Exit(0)),
-            };
+            var menu = Launcher.Menu
+                .AddItem(new("One", false))
+                .AddItem(new("Two1"))
+                .AddItem(new("Two2", false))
+                .AddItem(new("Two3", false))
+                .AddItem(new("Two4"))
+                .AddItem(new("Three"))
+                .AddItem(new("Method", Method1))
+                .SetItemColors(ConsoleColor.DarkBlue, ConsoleColor.Magenta)
+                .SetNonTraverserableItemColors(ConsoleColor.White, ConsoleColor.Red)
+                .AddExitItem()
+                .Build();
 
-            Launcher.Menu(options);
+            menu.Print();
+
+
+            //Launcher.Menu
+            //    .AddItem(new("One"))
+            //    .AddItem(new("Two"))
+            //    .AddExitItem()
+            //    .AddReturnItem()
+            //    .AddItem(new("Three"))
+            //    .AddItem(new("Four", Method1))
+            //    .Print();
+
+            new MenuItem("");
+            new MenuItem("", Method1);
+            new MenuItem("", () => Method1());
+            new MenuItem("", false);
+
         }
 
-        private static void ChangeColors()
+        private static void Method1()
         {
-            Header.Title.Colors = (ConsoleColor.Black, ConsoleColor.Red);
-            Header.Clock.Colors = (ConsoleColor.Black, ConsoleColor.Red);
-            Footer.Colors = (ConsoleColor.Black, ConsoleColor.Red);
-            Menu.HighlitedEntryColors = (ConsoleColor.Red, ConsoleColor.Black);
-        }
-
-        private static void EnableDisableLayout()
-        {
-            if (!Header.IsVisible || !Footer.IsVisible)
-            {
-                Header.IsVisible = true;
-                Footer.IsVisible = true;
-            }
-            else
-            {
-                Header.IsVisible = false;
-                Footer.IsVisible = false;
-            }
-        }
-
-        private static void Setup()
-        {
-        }
-
-        private static void Submenu()
-        {
-            List<Option> options = new()
-            {
-                new Option("Option 1", Option1),
-                new Option("Exit", () => Environment.Exit(0)),
-            };
-
-            Launcher.Menu(options);
-        }
-
-        private static void Option1()
-        {
-            Console.Clear();
-            Console.WriteLine($"Entered Option 1");
-            Console.ReadLine();
+            Launcher.Menu
+                .AddItem(new("One"))
+                .AddReturnItem()
+                .AddExitItem()
+                .AddItem(new("Four"))
+                .SetHighlitedColors(ConsoleColor.Blue, ConsoleColor.Yellow)
+                .Print();
         }
     }
 }

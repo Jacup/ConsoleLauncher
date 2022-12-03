@@ -1,10 +1,6 @@
 ﻿namespace ConsoleLauncher.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     internal class MenuFactoryTests
@@ -24,7 +20,7 @@
 
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetPointer(pointer));
+            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
         }
 
         [Test]
@@ -40,7 +36,7 @@
 
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetPointer(pointer));
+            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
         }
 
         [Test]
@@ -55,7 +51,7 @@
                 .Build();
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetPointer(pointer));
+            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
         }
 
         [Test]
@@ -71,10 +67,10 @@
                 .Build();
 
             // Act
-            menu.SetPointer(pointer);
+            menu.SetIndex(pointer);
 
             //Assert
-            Assert.AreEqual(pointer, menu.Pointer);
+            Assert.AreEqual(pointer, menu.Index);
         }
 
         #endregion

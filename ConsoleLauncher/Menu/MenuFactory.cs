@@ -1,6 +1,9 @@
 ﻿namespace ConsoleLauncher
 {
     using ConsoleLauncher.Interfaces;
+    using ConsoleLauncher.Layout;
+    using System;
+    using System.Linq;
 
     /// <summary>
     /// Printable menu with set of MenuItems.
@@ -28,16 +31,22 @@
         public List<MenuItem> Items { get; private set; }
 
         /// <inheritdoc/>
-        public (ConsoleColor Background, ConsoleColor Foreground) HighlitedItemColors { get; private set; }
+        public short Index { get; private set; }
 
         /// <inheritdoc/>
-        public bool CustomHighlitedItem { get; private set; }
+        public bool IndexSetFlag { get; private set; }
 
         /// <inheritdoc/>
-        public short Pointer { get; private set; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? HighlitedItemColors { get; private set; }
 
         /// <inheritdoc/>
-        public bool PointerSet { get; private set; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? ItemColors { get; private set; }
+
+        /// <inheritdoc/>
+        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraverserableItemColors { get; private set; }
+
+        /// <inheritdoc/>
+        public char? PointerCharacter { get; private set; }
 
         /// <inheritdoc/>
         public IMenu AddItem(MenuItem menuItem)
@@ -70,23 +79,41 @@
         }
 
         /// <inheritdoc/>
-        public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
+        public IMenu SetItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
-            HighlitedItemColors = (backgroundColor, fontColor);
-            CustomHighlitedItem = true;
+            ItemColors = (backgroundColor, fontColor);
+
             return this;
         }
 
         /// <inheritdoc/>
-        public IMenu SetPointer(short index)
+        public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
-            if (Items.ElementAtOrDefault(index) == null)
-                throw new ArgumentException($"Item at index {index} does not exists.", nameof(index));
-            if (!Items.ElementAt(index).IsTraverserable)
-                throw new ArgumentException($"Item at index {index} is not traverserable.", nameof(index));
+            HighlitedItemColors = (backgroundColor, fontColor);
 
-            Pointer = index;
-            PointerSet = true;
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IMenu SetNonTraverserableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
+        {
+            NonTraverserableItemColors = (backgroundColor, fontColor);
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IMenu SetPointerCharacter(char pointer)
+        {
+            PointerCharacter = pointer;
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IMenu SetIndex(short index)
+        {
+            Index = index;
 
             return this;
         }
@@ -103,20 +130,24 @@
             if (ExitItemFlag && !Items.Any(item => item.Description.Equals("Exit")))
                 Items.Add(new("Exit", () => Environment.Exit(0)));
 
-            if (!CustomHighlitedItem)
-                HighlitedItemColors = GetDefaultHighlitedColors();
+            ItemColors ??= Launcher.Settings.Colors.DefaultItemColors();
+            HighlitedItemColors ??= Launcher.Settings.Colors.DefaultHighlitedColors();
+            NonTraverserableItemColors ??= Launcher.Settings.Colors.DefaultNonTraverserableColors();
 
-            if (!PointerSet)
-                Pointer = MenuActions.GetFirstTraverserableMenuItemIndex(Items);
+            if (IndexSetFlag)
+            {
+                if (Items.ElementAtOrDefault(Index) == null)
+                    throw new ArgumentException($"Item at index {Index} does not exists.", nameof(Index));
+                if (!Items.ElementAt(Index).IsTraverserable)
+                    throw new ArgumentException($"Item at index {Index} is not traverserable.", nameof(Index));
+            }
+            else
+            {
+                Index = MenuActions.GetFirstTraverserableMenuItemIndex(Items);
+            }
 
             IsBuilded = true;
-
             return this;
-        }
-
-        private static (ConsoleColor Background, ConsoleColor Foreground) GetDefaultHighlitedColors() // TODO: FIX
-        {
-            return (ConsoleColor.White, ConsoleColor.Black);
         }
 
         /// <inheritdoc/>

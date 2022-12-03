@@ -1,6 +1,7 @@
 ﻿namespace ConsoleLauncher
 {
     using ConsoleLauncher.Enums;
+    using ConsoleLauncher.Helpers;
     using ConsoleLauncher.Interfaces;
     using ConsoleLauncher.Layout;
 
@@ -12,30 +13,30 @@
 
         internal static short GetNextTraverserableMenuItemIndex(IMenu menu)
         {
-            if (menu.Pointer == menu.Items.Count - 1)
-                return menu.Pointer;
+            if (menu.Index == menu.Items.Count - 1)
+                return menu.Index;
 
-            for (int i = menu.Pointer + 1; i < menu.Items.Count; i++)
+            for (int i = menu.Index + 1; i < menu.Items.Count; i++)
             {
                 if (menu.Items.ElementAt(i).IsTraverserable)
                     return (short)i;
             }
 
-            return menu.Pointer;
+            return menu.Index;
         }
 
         internal static short GetPreviousTraverserableMenuItemIndex(IMenu menu)
         {
-            if (menu.Pointer == 0)
-                return menu.Pointer;
+            if (menu.Index == 0)
+                return menu.Index;
 
-            for (int i = menu.Pointer - 1; i >= 0; i--)
+            for (int i = menu.Index - 1; i >= 0; i--)
             {
                 if (menu.Items.ElementAt(i).IsTraverserable)
                     return (short)i;
             }
 
-            return menu.Pointer;
+            return menu.Index;
         }
 
         internal static void Print(IMenu menu)
@@ -72,25 +73,33 @@
             Console.Clear();
 
             Header.PrintHeader();
-            PrintBody(menu);
+            PrintMenu(menu);
             Footer.PrintFooter();
         }
 
-        private static void PrintBody(IMenu menu)
+        private static void PrintMenu(IMenu menu)
         {
             for (short i = 0; i < menu.Items.Count; i++)
             {
-                if (i == menu.Pointer)
+                var currentItem = menu.Items.ElementAt(i);
+                (ConsoleColor Background, ConsoleColor Foreground) colors;
+
+                if (i == menu.Index)
                 {
-                    Settings.SetColors(menu.HighlitedItemColors);
+                    ConsoleHelper.WriteHighlitedItem(
+                        currentItem.Description,
+                        menu.HighlitedItemColors.GetValueOrDefault());
 
-                    Console.WriteLine($"> {menu.Items.ElementAt(i).Description}");
-
-                    Console.ResetColor();
                     continue;
                 }
 
-                Console.WriteLine($"  {menu.Items.ElementAt(i).Description}");
+                colors = currentItem.IsTraverserable
+                    ? menu.ItemColors.GetValueOrDefault()
+                    : menu.NonTraverserableItemColors.GetValueOrDefault();
+
+                ConsoleHelper.WriteItem(
+                    menu.Items.ElementAt(i).Description,
+                    colors);
             }
         }
 
@@ -115,19 +124,19 @@
             switch (action)
             {
                 case MenuAction.Select:
-                    menu.Items.ElementAt(menu.Pointer).Action?.Invoke();
+                    menu.Items.ElementAt(menu.Index).Action?.Invoke();
                     break;
                 case MenuAction.MoveUp:
-                    menu.SetPointer(GetPreviousTraverserableMenuItemIndex(menu));
+                    menu.SetIndex(GetPreviousTraverserableMenuItemIndex(menu));
                     break;
                 case MenuAction.MoveDown:
-                    menu.SetPointer(GetNextTraverserableMenuItemIndex(menu));
+                    menu.SetIndex(GetNextTraverserableMenuItemIndex(menu));
                     break;
                 case MenuAction.PageUp:
-                    menu.SetPointer(GetFirstTraverserableMenuItemIndex(menu.Items));
+                    menu.SetIndex(GetFirstTraverserableMenuItemIndex(menu.Items));
                     break;
                 case MenuAction.PageDown:
-                    menu.SetPointer(GetLastTraverserableMenuItemIndex(menu.Items));
+                    menu.SetIndex(GetLastTraverserableMenuItemIndex(menu.Items));
                     break;
                 default:
                     break;

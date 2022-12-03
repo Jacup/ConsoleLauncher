@@ -1,5 +1,6 @@
 ﻿namespace ConsoleLauncher
 {
+    using System;
     using ConsoleLauncher.Interfaces;
 
     /// <summary>

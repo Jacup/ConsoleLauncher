@@ -3,45 +3,33 @@
     /// <summary>
     /// Global ConsoleLauncher settings.
     /// </summary>
-    public static class Settings
+    public class Settings
     {
-        private static bool defaultsSet;
+        private static readonly object _lock = new();
 
-        /// <summary>
-        /// Gets default background color.
-        /// </summary>
-        internal static ConsoleColor DefaultBackgroundColor { get; private set; } = Console.BackgroundColor;
+        private static Settings? _instance;
 
-        /// <summary>
-        /// Gets default foreground(font) color.
-        /// </summary>
-        internal static ConsoleColor DefaultForegroundColor { get; private set; } = Console.ForegroundColor;
-
-        /// <summary>
-        /// Method to save default settings of console.
-        /// </summary>
-        internal static void GetDefaults()
+        private Settings()
         {
-            if (!defaultsSet)
-            {
-                DefaultBackgroundColor = Console.BackgroundColor;
-                DefaultForegroundColor = Console.ForegroundColor;
-
-                defaultsSet = true;
-            }
+            Colors = new();
         }
 
         /// <summary>
-        /// Method that set current ConsoleColors to provided in parameters.
+        /// Gets colors setup.
         /// </summary>
-        /// <param name="colors">ConsoleColors to set as tuple (background, foreground).</param>
-        internal static void SetColors((ConsoleColor Background, ConsoleColor Foreground) colors)
-        {
-            if (colors.Background != DefaultBackgroundColor)
-                Console.BackgroundColor = colors.Background;
+        public Colors Colors { get; private set; }
 
-            if (colors.Foreground != DefaultForegroundColor)
-                Console.ForegroundColor = colors.Foreground;
+        internal static Settings GetSettings()
+        {
+            if (_instance == null)
+            {
+                lock (_lock)
+                {
+                    _instance ??= new Settings();
+                }
+            }
+
+            return _instance;
         }
     }
 }
