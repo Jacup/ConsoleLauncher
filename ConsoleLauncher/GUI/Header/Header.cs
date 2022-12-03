@@ -1,9 +1,11 @@
-﻿namespace ConsoleLauncher.Layout
+﻿namespace ConsoleLauncher.GUI
 {
+    using ConsoleLauncher.GUI.Interfaces;
+
     /// <summary>
     /// Header used to be printed at top of the screen.
     /// </summary>
-    public static partial class Header
+    public class Header : IHeader
     {
         static Header() => IsVisible = false;
 

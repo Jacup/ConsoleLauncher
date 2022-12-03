@@ -1,4 +1,4 @@
-﻿namespace ConsoleLauncher.Interfaces
+﻿namespace ConsoleLauncher.GUI.Interfaces
 {
     /// <summary>
     /// Single menu item that is used to create menu entry.

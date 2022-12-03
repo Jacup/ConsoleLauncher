@@ -1,6 +1,7 @@
 ﻿namespace ConsoleLauncher
 {
-    using ConsoleLauncher.Layout;
+    using ConsoleLauncher.GUI;
+    using ConsoleLauncher.Setup;
 
     /// <summary>
     /// ConsoleLauncher tool. There you can find all functionalities that ConsoleLauncher can handle.
@@ -15,6 +16,11 @@
         /// <summary>
         /// Gets instance of global customizable <see cref="Settings"/>.
         /// </summary>
-        public static Settings Settings => Settings.GetSettings();
+        public static Settings Settings => Settings.GetInstance();
+
+        /// <summary>
+        /// Gets instance of  <see cref="Settings"/>.
+        /// </summary>
+        public static Layout Layout => Layout.GetInstance();
     }
 }

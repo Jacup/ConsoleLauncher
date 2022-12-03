@@ -1,4 +1,4 @@
-﻿namespace ConsoleLauncher.Interfaces
+﻿namespace ConsoleLauncher.GUI.Interfaces
 {
     /// <summary>
     /// Represents printable Console menu.

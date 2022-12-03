@@ -1,4 +1,4 @@
-﻿namespace ConsoleLauncher.Layout
+﻿namespace ConsoleLauncher.Setup
 {
     /// <summary>
     /// Global ConsoleLauncher settings.
@@ -19,7 +19,7 @@
         /// </summary>
         public Colors Colors { get; private set; }
 
-        internal static Settings GetSettings()
+        internal static Settings GetInstance()
         {
             if (_instance == null)
             {

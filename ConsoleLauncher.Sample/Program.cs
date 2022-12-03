@@ -1,7 +1,6 @@
 ﻿namespace ConsoleLauncher.Sample
 {
-    using ConsoleLauncher.Layout;
-    using System.Net.Http.Headers;
+    using ConsoleLauncher.GUI;
 
     internal class Program
     {

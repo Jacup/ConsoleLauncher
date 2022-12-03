@@ -1,4 +1,4 @@
-﻿namespace ConsoleLauncher.Enums
+﻿namespace ConsoleLauncher.GUI.Enums
 {
     internal enum MenuAction
     {

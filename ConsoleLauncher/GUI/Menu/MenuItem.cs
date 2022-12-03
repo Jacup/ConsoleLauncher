@@ -1,7 +1,7 @@
-﻿namespace ConsoleLauncher
+﻿namespace ConsoleLauncher.GUI
 {
     using System;
-    using ConsoleLauncher.Interfaces;
+    using ConsoleLauncher.GUI.Interfaces;
 
     /// <summary>
     /// Single item that is used to create menu entry.

@@ -1,4 +1,4 @@
-﻿namespace ConsoleLauncher.Layout
+﻿namespace ConsoleLauncher.Setup
 {
     /// <summary>
     /// Contains all app colors.

@@ -1,9 +1,12 @@
-﻿namespace ConsoleLauncher.Layout
+﻿namespace ConsoleLauncher.GUI
 {
+    using ConsoleLauncher.GUI.Interfaces;
+    using ConsoleLauncher.Helpers;
+
     /// <summary>
     ///  Footer used to print at bottom of the screen.
     /// </summary>
-    public static class Footer
+    public class Footer : IFooter
     {
         private const string Tooltip = "Use arrows to navigate, Enter to select, Exit to go back.";
 
@@ -42,7 +45,7 @@
         {
             if (IsVisible)
             {
-                Settings.SetColors(Colors);
+                ConsoleHelper.SetColors(Colors);
 
                 if (LeftText.Length > 0)
                 {

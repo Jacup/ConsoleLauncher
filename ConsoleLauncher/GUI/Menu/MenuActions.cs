@@ -1,9 +1,8 @@
-﻿namespace ConsoleLauncher
+﻿namespace ConsoleLauncher.GUI
 {
-    using ConsoleLauncher.Enums;
+    using ConsoleLauncher.GUI.Enums;
+    using ConsoleLauncher.GUI.Interfaces;
     using ConsoleLauncher.Helpers;
-    using ConsoleLauncher.Interfaces;
-    using ConsoleLauncher.Layout;
 
     internal static class MenuActions
     {

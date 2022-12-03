@@ -1,9 +1,9 @@
-﻿namespace ConsoleLauncher
+﻿namespace ConsoleLauncher.GUI
 {
-    using ConsoleLauncher.Interfaces;
-    using ConsoleLauncher.Layout;
     using System;
     using System.Linq;
+    using ConsoleLauncher;
+    using ConsoleLauncher.GUI.Interfaces;
 
     /// <summary>
     /// Printable menu with set of MenuItems.

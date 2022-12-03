@@ -1,5 +1,7 @@
 ﻿namespace ConsoleLauncher.Tests
 {
+    using ConsoleLauncher.GUI;
+
     [TestFixture]
     internal class MenuActionsTests
     {
