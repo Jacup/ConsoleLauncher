@@ -1,7 +1,6 @@
-﻿namespace ConsoleLauncher.GUI
+﻿namespace ConsoleLauncher.GUI.MenuItems
 {
     using System;
-    using ConsoleLauncher.GUI.Interfaces;
 
     /// <summary>
     /// Single item that is used to create menu entry.
@@ -11,7 +10,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuItem"/> class.
         /// </summary>
-        /// <param name="name">Text to print as menu entry.</param>
+        /// <param name="name">Name to print as menu entry.</param>
         /// <param name="action">Action taken when item is choosen.</param>
         public MenuItem(string name, Action action)
         {
@@ -23,7 +22,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuItem"/> class.
         /// </summary>
-        /// <param name="name">Text to print as menu entry.</param>
+        /// <param name="name">Name to print as menu entry.</param>
         /// <param name="traverserable">Indicates whether item is traverserable.</param>
         public MenuItem(string name, bool traverserable = true)
         {
