@@ -6,8 +6,7 @@
     public class Settings
     {
         private static readonly object _lock = new();
-
-        private static Settings? _instance;
+        private static Settings? instance;
 
         private Settings()
         {
@@ -19,17 +18,22 @@
         /// </summary>
         public Colors Colors { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the pointer character.
+        /// </summary>
+        public char PointerCharacter { get; set; } = '>';
+
         internal static Settings GetInstance()
         {
-            if (_instance == null)
+            if (instance == null)
             {
                 lock (_lock)
                 {
-                    _instance ??= new Settings();
+                    instance ??= new Settings();
                 }
             }
 
-            return _instance;
+            return instance;
         }
     }
 }

@@ -1,23 +1,13 @@
 ﻿namespace ConsoleLauncher.Setup
 {
     /// <summary>
-    /// Contains all app colors.
+    /// Contains Launcher color setup.
     /// </summary>
     public class Colors
     {
         internal Colors()
         {
         }
-
-        /// <summary>
-        /// Gets or sets color of app background.
-        /// </summary>
-        public ConsoleColor AppBackgroundColor { get; set; } = Console.BackgroundColor;
-
-        /// <summary>
-        /// Gets or sets color of app foreground.
-        /// </summary>
-        public ConsoleColor AppForegroundColor { get; set; } = Console.ForegroundColor;
 
         /// <summary>
         /// Gets or sets color of Menu Item background.
