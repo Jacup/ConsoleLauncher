@@ -1,6 +1,8 @@
 ﻿namespace ConsoleLauncher.Tests
 {
     using ConsoleLauncher.GUI;
+    using ConsoleLauncher.GUI.MenuItems;
+    using Moq;
 
     [TestFixture]
     internal class MenuActionsTests
@@ -21,7 +23,7 @@
         public void ValidateTest_NonEmptyItemsList_ShouldNotThrowException()
         {
             // Arrange
-            var menu = Launcher.Menu.AddItem(new("")).Build();
+            var menu = Launcher.Menu.AddItem(new MenuItem("")).Build();
 
             // Act & Assert
             Assert.DoesNotThrow(() => MenuActions.Validate(menu));
@@ -35,9 +37,9 @@
         public void GetFirstTraverserableMenuItemIndexTest_AllItemsTraverserable_ShouldPointAtFirstElement()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One"), new("Two"), new("Three")
+                new MenuItem("One"), new MenuItem("Two"), new MenuItem("Three")
             };
 
             short expectedPointer = 0;
@@ -53,9 +55,9 @@
         public void GetFirstTraverserableMenuItemIndexTest_FirstItemNotTraverserable_ShouldPointAtSecondElement()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One", false), new("Two"), new("Three")
+                new MenuItem("One", false), new MenuItem("Two"), new MenuItem("Three")
             };
 
             short expectedPointer = 1;
@@ -71,9 +73,9 @@
         public void GetFirstTraverserableMenuItemIndexTest_AllItemsNotTraverserable_ShouldReturnNegative()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One", false), new("Two", false), new("Three", false)
+                new MenuItem("One", false), new MenuItem("Two", false), new MenuItem("Three", false)
             };
 
             short expectedPointer = -1;
@@ -93,9 +95,9 @@
         public void GetLastTraverserableMenuItemIndexTest_AllItemsTraverserable_ShouldPointAtLastElement()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One"), new("Two"), new("Three")
+                new MenuItem("One"), new MenuItem("Two"), new MenuItem("Three")
             };
 
             short expectedPointer = 2;
@@ -108,12 +110,12 @@
         }
 
         [Test]
-        public void GetLastTraverserableMenuItemIndexTest_FirstItemNotTraverserable_ShouldPointAtThirdElement()
+        public void GetLastTraverserableMenuItemIndexTest_LastItemNotTraverserable_ShouldPointAtThirdElement()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One", false), new("Two"), new("Three"), new("Four", false)
+                new MenuItem("One", false), new MenuItem("Two"), new MenuItem("Three"), new MenuItem("Four", false)
             };
 
             short expectedPointer = 2;
@@ -126,12 +128,12 @@
         }
 
         [Test]
-        public void GetLastTraverserableMenuItemIndexTest_FirstItemNotTraverserable_ShouldPointAtFirstElement()
+        public void GetLastTraverserableMenuItemIndexTest_FirstAndLastItemNotTraverserable_ShouldPointAtThirdElement()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One", false), new("Two"), new("Three"), new("Four", false)
+                new MenuItem("One", false), new MenuItem("Two"), new MenuItem("Three"), new MenuItem("Four", false)
             };
 
             short expectedPointer = 2;
@@ -147,11 +149,11 @@
         public void GetLastTraverserableMenuItemIndexTest_AllItemsNotTraverserable_ShouldReturnNegative()
         {
             // Arrange
-            List<MenuItem> menuItems = new()
+            List<IMenuItem> menuItems = new()
             {
-                new("One", false), new("Two", false), new("Three", false)
+                new MenuItem("One", false), new MenuItem("Two", false), new MenuItem("Three", false)
             };
-
+            
             short expectedPointer = -1;
 
             // Act
@@ -170,9 +172,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two"))
-                .AddItem(new("Three"))
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two"))
+                .AddItem(new MenuItem("Three"))
                 .Build();
 
             short expectedPointer = 1;
@@ -189,9 +191,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three"))
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three"))
                 .Build();
 
             short expectedPointer = 2;
@@ -208,9 +210,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three", false))
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three", false))
                 .Build();
 
             short expectedPointer = 0;
@@ -227,9 +229,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three", false))
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three", false))
                 .Build();
 
             short expectedPointer = -1;
@@ -246,10 +248,10 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two"))
-                .AddItem(new("Three"))
-                .SetIndex(2)
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two"))
+                .AddItem(new MenuItem("Three"))
+                .SetPointerIndex(2)
                 .Build();
 
             short expectedPointer = 2;
@@ -270,9 +272,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two"))
-                .AddItem(new("Three"))
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two"))
+                .AddItem(new MenuItem("Three"))
                 .Build();
 
             short expectedPointer = 0;
@@ -289,10 +291,10 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three"))
-                .SetIndex(2)
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three"))
+                .SetPointerIndex(2)
                 .Build();
 
             short expectedPointer = 0;
@@ -309,10 +311,10 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two"))
-                .AddItem(new("Three"))
-                .SetIndex(2)
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two"))
+                .AddItem(new MenuItem("Three"))
+                .SetPointerIndex(2)
                 .Build();
 
             short expectedPointer = 1;
@@ -329,10 +331,10 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three"))
-                .SetIndex(2)
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three"))
+                .SetPointerIndex(2)
                 .Build();
 
             short expectedPointer = 2;
@@ -349,9 +351,9 @@
         {
             // Arrange
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three", false))
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three", false))
                 .Build();
 
             short expectedPointer = -1;

@@ -1,7 +1,5 @@
 ﻿namespace ConsoleLauncher.Tests
 {
-    using System;
-
     [TestFixture]
     internal class MenuFactoryTests
     {
@@ -14,13 +12,13 @@
             short pointer = 0;
 
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two"))
-                .Build();
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two"))
+                .SetPointerIndex(pointer);
 
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
+            Assert.Throws<ArgumentException>(() => menu.Build());
         }
 
         [Test]
@@ -30,13 +28,12 @@
             short pointer = 1;
 
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two", false))
-                .Build();
-
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two", false))
+                .SetPointerIndex(pointer);
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
+            Assert.Throws<ArgumentException>(() => menu.Build());
         }
 
         [Test]
@@ -46,12 +43,12 @@
             short pointer = 2;
 
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two", false))
-                .Build();
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two", false))
+                .SetPointerIndex(pointer);
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => menu.SetIndex(pointer));
+            Assert.Throws<ArgumentException>(() => menu.Build());
         }
 
         [Test]
@@ -61,16 +58,16 @@
             short pointer = 2;
 
             var menu = Launcher.Menu
-                .AddItem(new("One"))
-                .AddItem(new("Two", false))
-                .AddItem(new("Three"))
+                .AddItem(new MenuItem("One"))
+                .AddItem(new MenuItem("Two", false))
+                .AddItem(new MenuItem("Three"))
                 .Build();
 
             // Act
-            menu.SetIndex(pointer);
+            menu.SetPointerIndex(pointer);
 
             //Assert
-            Assert.AreEqual(pointer, menu.Index);
+            Assert.AreEqual(pointer, menu.PointerIndex);
         }
 
         #endregion
