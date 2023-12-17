@@ -2,58 +2,65 @@
 {
     using ConsoleLauncher.GUI.Enums;
     using ConsoleLauncher.GUI.Interfaces;
+    using ConsoleLauncher.GUI.MenuItems;
     using ConsoleLauncher.Helpers;
 
     internal static class MenuActions
     {
-        internal static short GetFirstTraverserableMenuItemIndex(List<MenuItem> items) => (short)items.FindIndex(item => item.IsTraverserable);
+        internal static short GetFirstTraverserableMenuItemIndex(IEnumerable<IMenuItem> items)
+        {
+            return (short)items.ToList().FindIndex(item => item.IsTraverserable);
+        }
 
-        internal static short GetLastTraverserableMenuItemIndex(List<MenuItem> items) => (short)items.FindLastIndex(item => item.IsTraverserable);
+        internal static short GetLastTraverserableMenuItemIndex(IEnumerable<IMenuItem> items)
+        {
+            return (short)items.ToList().FindLastIndex(item => item.IsTraverserable);
+        }
 
         internal static short GetNextTraverserableMenuItemIndex(IMenu menu)
         {
-            if (menu.Index == menu.Items.Count - 1)
-                return menu.Index;
+            if (menu.PointerIndex == menu.Items.Count - 1)
+                return menu.PointerIndex;
 
-            for (int i = menu.Index + 1; i < menu.Items.Count; i++)
+            for (int i = menu.PointerIndex + 1; i < menu.Items.Count; i++)
             {
                 if (menu.Items.ElementAt(i).IsTraverserable)
                     return (short)i;
             }
 
-            return menu.Index;
+            return menu.PointerIndex;
         }
 
         internal static short GetPreviousTraverserableMenuItemIndex(IMenu menu)
         {
-            if (menu.Index == 0)
-                return menu.Index;
+            if (menu.PointerIndex == 0)
+                return menu.PointerIndex;
 
-            for (int i = menu.Index - 1; i >= 0; i--)
+            for (int i = menu.PointerIndex - 1; i >= 0; i--)
             {
                 if (menu.Items.ElementAt(i).IsTraverserable)
                     return (short)i;
             }
 
-            return menu.Index;
+            return menu.PointerIndex;
         }
 
         internal static void Print(IMenu menu)
         {
             Validate(menu);
-            Execute(menu);
+            ExecuteUI(menu);
         }
 
         internal static void Validate(IMenu menu)
         {
-            if (!menu.IsBuilded)
+            if (!menu.IsBuilt)
                 menu.Build();
 
             if (!menu.Items.Any())
                 throw new ArgumentNullException(nameof(menu.Items), "There is not any elements to print.");
         }
 
-        private static void Execute(IMenu menu)
+        private static void ExecuteUI(IMenu menu)
         {
             MenuAction action;
 
@@ -71,23 +78,26 @@
             Console.CursorVisible = false;
             Console.Clear();
 
-            Header.PrintHeader();
+            Launcher.Layout.Header.Print();
             PrintMenu(menu);
-            Footer.PrintFooter();
+            Launcher.Layout.Footer.Print();
         }
 
         private static void PrintMenu(IMenu menu)
         {
-            for (short i = 0; i < menu.Items.Count; i++)
+            IMenuItem[] itemsToPrint = CreatePrintableCollection(menu);
+
+            for (short i = 0; i < itemsToPrint.Length; i++)
             {
-                var currentItem = menu.Items.ElementAt(i);
+                var currentItem = itemsToPrint[i];
                 (ConsoleColor Background, ConsoleColor Foreground) colors;
 
-                if (i == menu.Index)
+                if (i == menu.PointerIndex)
                 {
                     ConsoleHelper.WriteHighlitedItem(
                         currentItem.Description,
-                        menu.HighlitedItemColors.GetValueOrDefault());
+                        menu.HighlitedItemColors.GetValueOrDefault(),
+                        menu.PointerChar);
 
                     continue;
                 }
@@ -97,9 +107,22 @@
                     : menu.NonTraverserableItemColors.GetValueOrDefault();
 
                 ConsoleHelper.WriteItem(
-                    menu.Items.ElementAt(i).Description,
+                    itemsToPrint[i].Description,
                     colors);
             }
+        }
+
+        // TODO: enable large collections of IMenuItems(more than buffer height).
+        private static IMenuItem[] CreatePrintableCollection(IMenu menu)
+        {
+            int height = Console.BufferHeight - (Launcher.Layout.Header.Visible ? 1 : 0) - (Launcher.Layout.Footer.Visible ? 1 : 0);
+
+            IMenuItem[] printableItems = new IMenuItem[height];
+
+            if (menu.Items.Count <= height)
+                return menu.Items.ToArray();
+
+            return printableItems;
         }
 
         private static MenuAction GetUserAction()
@@ -118,24 +141,24 @@
             };
         }
 
-        private static void PerformAction(MenuAction action, IMenu menu) // not sure if it is needed.
+        private static void PerformAction(MenuAction action, IMenu menu)
         {
             switch (action)
             {
                 case MenuAction.Select:
-                    menu.Items.ElementAt(menu.Index).Action?.Invoke();
+                    menu.Items.ElementAt(menu.PointerIndex).Action?.Invoke();
                     break;
                 case MenuAction.MoveUp:
-                    menu.SetIndex(GetPreviousTraverserableMenuItemIndex(menu));
+                    menu.SetPointerIndex(GetPreviousTraverserableMenuItemIndex(menu));
                     break;
                 case MenuAction.MoveDown:
-                    menu.SetIndex(GetNextTraverserableMenuItemIndex(menu));
+                    menu.SetPointerIndex(GetNextTraverserableMenuItemIndex(menu));
                     break;
                 case MenuAction.PageUp:
-                    menu.SetIndex(GetFirstTraverserableMenuItemIndex(menu.Items));
+                    menu.SetPointerIndex(GetFirstTraverserableMenuItemIndex(menu.Items));
                     break;
                 case MenuAction.PageDown:
-                    menu.SetIndex(GetLastTraverserableMenuItemIndex(menu.Items));
+                    menu.SetPointerIndex(GetLastTraverserableMenuItemIndex(menu.Items));
                     break;
                 default:
                     break;

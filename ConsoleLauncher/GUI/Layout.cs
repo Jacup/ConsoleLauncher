@@ -1,7 +1,7 @@
-﻿using ConsoleLauncher.Setup;
-
-namespace ConsoleLauncher.GUI
+﻿namespace ConsoleLauncher.GUI
 {
+    using ConsoleLauncher.GUI.Interfaces;
+
     /// <summary>
     /// Layout.
     /// </summary>
@@ -11,14 +11,21 @@ namespace ConsoleLauncher.GUI
 
         private static Layout? _instance;
 
-        internal Layout()
+        internal Layout(IFooter footer, IHeader header)
         {
+            Footer = footer;
+            Header = header;
         }
 
         /// <summary>
-        /// Gets colors setup.
+        /// Gets or sets footer.
         /// </summary>
-        public Colors Colors { get; private set; }
+        public IFooter Footer { get; set; }
+
+        /// <summary>
+        /// Gets or sets header.
+        /// </summary>
+        public IHeader Header { get; set; }
 
         internal static Layout GetInstance()
         {
@@ -26,7 +33,7 @@ namespace ConsoleLauncher.GUI
             {
                 lock (_lock)
                 {
-                    _instance ??= new Layout();
+                    _instance ??= new Layout(new Footer(), new Header());
                 }
             }
 

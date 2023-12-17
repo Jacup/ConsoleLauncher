@@ -4,18 +4,21 @@
     using System.Linq;
     using ConsoleLauncher;
     using ConsoleLauncher.GUI.Interfaces;
+    using ConsoleLauncher.GUI.MenuItems;
 
     /// <summary>
     /// Printable menu with set of MenuItems.
     /// </summary>
     public class MenuFactory : IMenu
     {
+        private readonly List<IMenuItem> _items;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuFactory"/> class.
         /// </summary>
         internal MenuFactory()
         {
-            Items = new List<MenuItem>();
+            _items = new List<IMenuItem>();
         }
 
         /// <inheritdoc/>
@@ -25,16 +28,10 @@
         public bool ReturnItemFlag { get; private set; }
 
         /// <inheritdoc/>
-        public bool IsBuilded { get; private set; }
+        public bool IsBuilt { get; private set; }
 
         /// <inheritdoc/>
-        public List<MenuItem> Items { get; private set; }
-
-        /// <inheritdoc/>
-        public short Index { get; private set; }
-
-        /// <inheritdoc/>
-        public bool IndexSetFlag { get; private set; }
+        public IReadOnlyCollection<IMenuItem> Items => _items;
 
         /// <inheritdoc/>
         public (ConsoleColor Background, ConsoleColor Foreground)? HighlitedItemColors { get; private set; }
@@ -46,20 +43,23 @@
         public (ConsoleColor Background, ConsoleColor Foreground)? NonTraverserableItemColors { get; private set; }
 
         /// <inheritdoc/>
-        public char? PointerCharacter { get; private set; }
+        public bool CustomPointerIndexFlag { get; private set; }
 
         /// <inheritdoc/>
-        public IMenu AddItem(MenuItem menuItem)
+        public short PointerIndex { get; private set; }
+
+        /// <inheritdoc/>
+        public char PointerChar { get; private set; }
+
+        /// <inheritdoc/>
+        public bool PointerCharFlag { get; private set; }
+
+        /// <inheritdoc/>
+        public IMenu AddItem(IMenuItem menuItem)
         {
-            Items.Add(menuItem);
+            _items.Add(menuItem);
 
             return this;
-        }
-
-        /// <inheritdoc/>
-        public IMenu Setup()
-        {
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
@@ -79,7 +79,7 @@
         }
 
         /// <inheritdoc/>
-        public IMenu SetItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
+        public IMenu SetItemsColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
             ItemColors = (backgroundColor, fontColor);
 
@@ -105,15 +105,17 @@
         /// <inheritdoc/>
         public IMenu SetPointerCharacter(char pointer)
         {
-            PointerCharacter = pointer;
+            PointerChar = pointer;
+            PointerCharFlag = true;
 
             return this;
         }
 
         /// <inheritdoc/>
-        public IMenu SetIndex(short index)
+        public IMenu SetPointerIndex(short index)
         {
-            Index = index;
+            CustomPointerIndexFlag = true;
+            PointerIndex = index;
 
             return this;
         }
@@ -121,32 +123,33 @@
         /// <inheritdoc/>
         public IMenu Build()
         {
-            if (IsBuilded)
+            if (IsBuilt)
                 return this;
 
-            if (ReturnItemFlag && !Items.Any(item => item.Description.Equals("Return")))
-                Items.Add(new("Return", () => { return; }));
-
-            if (ExitItemFlag && !Items.Any(item => item.Description.Equals("Exit")))
-                Items.Add(new("Exit", () => Environment.Exit(0)));
+            if (ReturnItemFlag && !_items.Any(item => item.Description.Equals("Return")))
+                _items.Add(new MenuItem("Return", () => { return; }));
+            if (ExitItemFlag && !_items.Any(item => item.Description.Equals("Exit")))
+                _items.Add(new MenuItem("Exit", () => Environment.Exit(0)));
+            if (!PointerCharFlag)
+                PointerChar = Launcher.Settings.PointerCharacter;
 
             ItemColors ??= Launcher.Settings.Colors.DefaultItemColors();
             HighlitedItemColors ??= Launcher.Settings.Colors.DefaultHighlitedColors();
             NonTraverserableItemColors ??= Launcher.Settings.Colors.DefaultNonTraverserableColors();
 
-            if (IndexSetFlag)
+            if (CustomPointerIndexFlag)
             {
-                if (Items.ElementAtOrDefault(Index) == null)
-                    throw new ArgumentException($"Item at index {Index} does not exists.", nameof(Index));
-                if (!Items.ElementAt(Index).IsTraverserable)
-                    throw new ArgumentException($"Item at index {Index} is not traverserable.", nameof(Index));
+                if (_items.ElementAtOrDefault(PointerIndex) == null)
+                    throw new ArgumentException($"Item at index {PointerIndex} does not exists.", nameof(PointerIndex));
+                if (!_items.ElementAt(PointerIndex).IsTraverserable)
+                    throw new ArgumentException($"Item at index {PointerIndex} is not traverserable.", nameof(PointerIndex));
             }
             else
             {
-                Index = MenuActions.GetFirstTraverserableMenuItemIndex(Items);
+                PointerIndex = MenuActions.GetFirstTraverserableMenuItemIndex(Items);
             }
 
-            IsBuilded = true;
+            IsBuilt = true;
             return this;
         }
 

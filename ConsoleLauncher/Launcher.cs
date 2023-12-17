@@ -1,6 +1,7 @@
 ﻿namespace ConsoleLauncher
 {
     using ConsoleLauncher.GUI;
+    using ConsoleLauncher.GUI.MenuItems;
     using ConsoleLauncher.Setup;
 
     /// <summary>
@@ -19,7 +20,7 @@
         public static Settings Settings => Settings.GetInstance();
 
         /// <summary>
-        /// Gets instance of  <see cref="Settings"/>.
+        /// Gets instance of <see cref="Layout"/>.
         /// </summary>
         public static Layout Layout => Layout.GetInstance();
     }
