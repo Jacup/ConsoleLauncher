@@ -57,20 +57,20 @@
                 menu.Build();
 
             if (!menu.Items.Any())
-                throw new ArgumentNullException(nameof(menu.Items), "There is not any elements to print.");
+                throw new ArgumentNullException(nameof(menu.Items), "There are no elements to print.");
         }
 
         private static void ExecuteUI(IMenu menu)
         {
             MenuAction action;
-
+            MenuAction result;
             do
             {
                 Render(menu);
                 action = GetUserAction();
-                PerformAction(action, menu);
+                PerformAction(out result, action, menu);
             }
-            while (action != MenuAction.Return);
+            while (action != MenuAction.Return && result != MenuAction.Return);
         }
 
         private static void Render(IMenu menu)
@@ -141,11 +141,19 @@
             };
         }
 
-        private static void PerformAction(MenuAction action, IMenu menu)
+        private static void PerformAction(out MenuAction actionResult, MenuAction action, IMenu menu)
         {
+            actionResult = MenuAction.None;
+
             switch (action)
             {
                 case MenuAction.Select:
+                    if (menu.Items.ElementAt(menu.PointerIndex) is ReturnItem)
+                    {
+                        actionResult = MenuAction.Return;
+                        break;
+                    }
+
                     menu.Items.ElementAt(menu.PointerIndex).Action?.Invoke();
                     break;
                 case MenuAction.MoveUp:

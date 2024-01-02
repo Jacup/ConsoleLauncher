@@ -126,10 +126,10 @@
             if (IsBuilt)
                 return this;
 
-            if (ReturnItemFlag && !_items.Any(item => item.Description.Equals("Return")))
-                _items.Add(new MenuItem("Return", () => { return; }));
-            if (ExitItemFlag && !_items.Any(item => item.Description.Equals("Exit")))
-                _items.Add(new MenuItem("Exit", () => Environment.Exit(0)));
+            if (ReturnItemFlag && !_items.OfType<ReturnItem>().Any())
+                _items.Add(new ReturnItem("Return"));
+            if (ExitItemFlag && !_items.OfType<ExitItem>().Any())
+                _items.Add(new ExitItem("Exit"));
             if (!PointerCharFlag)
                 PointerChar = Launcher.Settings.PointerCharacter;
 
