@@ -1,53 +1,46 @@
 ﻿namespace ConsoleLauncher.Sample
 {
-    using ConsoleLauncher.GUI;
+    using ConsoleLauncher.GUI.Interfaces;
+    using ConsoleLauncher.GUI.MenuItems;
 
     internal class Program
     {
         static void Main(string[] args)
         {
-
             var menu = Launcher.Menu
-                .AddItem(new("One", false))
-                .AddItem(new("Two1"))
-                .AddItem(new("Two2", false))
-                .AddItem(new("Two3", false))
-                .AddItem(new("Two4"))
-                .AddItem(new("Three"))
-                .AddItem(new("Method", Method1))
-                .SetItemColors(ConsoleColor.DarkBlue, ConsoleColor.Magenta)
-                .SetNonTraverserableItemColors(ConsoleColor.White, ConsoleColor.Red)
                 .AddExitItem()
+                .AddItem(new MenuItem("One", false))
+                .AddItem(new MenuItem("Two1"))
+                .AddItem(new MenuItem("Two2", false))
+                .AddItem(new MenuItem("Two3", false))
+                .AddItem(new MenuItem("Settings", Submenu1))
+                .AddItem(new MenuItem("Three"))
+                .SetPointerCharacter('^')
                 .Build();
+
+            Launcher.Layout.Header.Visible = true;
+            Launcher.Layout.Footer.Visible = true;
+            Launcher.Layout.Footer.RightItem = new ComponentItem("RightFooter", true, (ConsoleColor.Black, ConsoleColor.Red));
 
             menu.Print();
 
-
-            //Launcher.Menu
-            //    .AddItem(new("One"))
-            //    .AddItem(new("Two"))
-            //    .AddExitItem()
-            //    .AddReturnItem()
-            //    .AddItem(new("Three"))
-            //    .AddItem(new("Four", Method1))
-            //    .Print();
-
-            new MenuItem("");
-            new MenuItem("", Method1);
-            new MenuItem("", () => Method1());
-            new MenuItem("", false);
-
+            //new MenuItem("");
+            //new MenuItem("", Submenu1);
+            //new MenuItem("", () => Submenu1());
+            //new MenuItem("", false);
         }
 
-        private static void Method1()
+        private static void Submenu1()
         {
             Launcher.Menu
-                .AddItem(new("One"))
+                .AddItem(new MenuItem("Switch header visibility", SwitchHeaderVisibility))
+                .AddItem(new MenuItem("Four"))
+                .SetHighlitedColors(ConsoleColor.Blue, ConsoleColor.Yellow)
                 .AddReturnItem()
                 .AddExitItem()
-                .AddItem(new("Four"))
-                .SetHighlitedColors(ConsoleColor.Blue, ConsoleColor.Yellow)
                 .Print();
         }
+
+        private static void SwitchHeaderVisibility() => Launcher.Layout.Header.Visible = !Launcher.Layout.Header.Visible;
     }
 }
