@@ -21,7 +21,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
   
   Test:
-    
+    needs: Build
     runs-on: ubuntu-latest
 
     steps:
