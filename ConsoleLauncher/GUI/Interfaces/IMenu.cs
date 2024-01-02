@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents printable Console menu.
     /// </summary>
-    public interface IMenu
+    public interface IMenu : IPrintable
     {
         /// <summary>
         /// Gets list of added items.
@@ -125,10 +125,5 @@
         /// </summary>
         /// <returns>Current instance of <see cref="IMenu"/>.</returns>
         public IMenu Build();
-
-        /// <summary>
-        /// Prints current menu on console.
-        /// </summary>
-        public void Print();
     }
 }

@@ -1,32 +1,19 @@
 ﻿namespace ConsoleLauncher.GUI
 {
-    using ConsoleLauncher.GUI.Interfaces;
-
     /// <summary>
     /// Header used to be printed at top of the screen.
     /// </summary>
-    public class Header : IHeader
+    public class Header : LayoutComponent
     {
-        static Header() => IsVisible = false;
-
         /// <summary>
-        /// Gets or sets a value indicating whether the header is visible.
+        /// Initializes a new instance of the <see cref="Header"/> class.
         /// </summary>
-        /// <returns>true if the header is visible; otherwise, false.</returns>
-        public static bool IsVisible { get; set; }
-
-        /// <summary>
-        /// Print whole header.
-        /// </summary>
-        internal static void PrintHeader()
+        public Header()
+            : base()
         {
-            if (IsVisible)
-            {
-                Title.WriteTitle();
-                Clock.WriteClock();
-
-                Console.WriteLine();
-            }
+            TopPosition = Console.CursorTop;
+            CenterItem = new TitleItem();
+            RightItem = new ClockItem();
         }
     }
 }

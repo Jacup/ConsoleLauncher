@@ -11,7 +11,7 @@
 
         private static Layout? _instance;
 
-        internal Layout(IFooter footer, IHeader header)
+        private Layout(ILayoutComponent footer, ILayoutComponent header)
         {
             Footer = footer;
             Header = header;
@@ -20,12 +20,12 @@
         /// <summary>
         /// Gets or sets footer.
         /// </summary>
-        public IFooter Footer { get; set; }
+        public ILayoutComponent Footer { get; set; }
 
         /// <summary>
         /// Gets or sets header.
         /// </summary>
-        public IHeader Header { get; set; }
+        public ILayoutComponent Header { get; set; }
 
         internal static Layout GetInstance()
         {
