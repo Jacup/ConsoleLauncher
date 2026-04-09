@@ -67,7 +67,7 @@
             menu.SetPointerIndex(pointer);
 
             //Assert
-            Assert.AreEqual(pointer, menu.PointerIndex);
+            Assert.That(pointer, Is.EqualTo(menu.PointerIndex));
         }
 
         #endregion

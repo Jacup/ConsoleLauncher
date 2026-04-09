@@ -48,7 +48,7 @@
             var actualPointer = MenuActions.GetFirstTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -66,7 +66,7 @@
             var actualPointer = MenuActions.GetFirstTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -84,7 +84,7 @@
             var actualPointer = MenuActions.GetFirstTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         #endregion
@@ -106,7 +106,7 @@
             var actualPointer = MenuActions.GetLastTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -124,7 +124,7 @@
             var actualPointer = MenuActions.GetLastTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -142,7 +142,7 @@
             var actualPointer = MenuActions.GetLastTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -160,7 +160,7 @@
             var actualPointer = MenuActions.GetLastTraverserableMenuItemIndex(menuItems);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         #endregion
@@ -183,7 +183,7 @@
             var actualPointer = MenuActions.GetNextTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -202,7 +202,7 @@
             var actualPointer = MenuActions.GetNextTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -221,7 +221,7 @@
             var actualPointer = MenuActions.GetNextTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -240,7 +240,7 @@
             var actualPointer = MenuActions.GetNextTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -260,7 +260,7 @@
             var actualPointer = MenuActions.GetNextTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         #endregion
@@ -283,7 +283,7 @@
             var actualPointer = MenuActions.GetPreviousTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -303,7 +303,7 @@
             var actualPointer = MenuActions.GetPreviousTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -323,7 +323,7 @@
             var actualPointer = MenuActions.GetPreviousTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -343,7 +343,7 @@
             var actualPointer = MenuActions.GetPreviousTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         [Test]
@@ -362,7 +362,7 @@
             var actualPointer = MenuActions.GetPreviousTraverserableMenuItemIndex(menu);
 
             // Assert
-            Assert.AreEqual(expectedPointer, actualPointer);
+            Assert.That(expectedPointer, Is.EqualTo(actualPointer));
         }
 
         #endregion
