@@ -96,7 +96,7 @@
                 {
                     ConsoleHelper.WriteHighlitedItem(
                         currentItem.Description,
-                        menu.HighlitedItemColors.GetValueOrDefault(),
+                        menu.HighlightedItemColors.GetValueOrDefault(),
                         menu.PointerChar);
 
                     continue;
@@ -104,7 +104,7 @@
 
                 colors = currentItem.IsTraverserable
                     ? menu.ItemColors.GetValueOrDefault()
-                    : menu.NonTraverserableItemColors.GetValueOrDefault();
+                    : menu.NonTraversableItemColors.GetValueOrDefault();
 
                 ConsoleHelper.WriteItem(
                     itemsToPrint[i].Description,
