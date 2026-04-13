@@ -33,19 +33,19 @@
         public bool ReturnItemFlag { get; }
 
         /// <summary>
-        /// Gets colors of highlited menu item.
+        /// Gets colors of highlighted menu item.
         /// </summary>
-        public (ConsoleColor Background, ConsoleColor Foreground)? HighlitedItemColors { get; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? HighlightedItemColors { get; }
 
         /// <summary>
-        /// Gets colors of highlited menu item.
+        /// Gets colors of highlighted menu item.
         /// </summary>
         public (ConsoleColor Background, ConsoleColor Foreground)? ItemColors { get; }
 
         /// <summary>
-        /// Gets colors of highlited menu item.
+        /// Gets colors of highlighted menu item.
         /// </summary>
-        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraverserableItemColors { get; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraversableItemColors { get; }
 
         /// <summary>
         /// Gets character used as pointer.
@@ -82,12 +82,12 @@
         public IMenu AddReturnItem();
 
         /// <summary>
-        /// Set colors for highlited menu item. Overrides global settings.
+        /// Set colors for highlighted menu item. Overrides global settings.
         /// </summary>
         /// <param name="backgroundColor">Color to be set as background color.</param>
         /// <param name="fontColor">Color to be sent as font color.</param>
         /// <returns>Current instance of <see cref="IMenu"/>.</returns>
-        public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
+        public IMenu SetHighlightedColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
 
         /// <summary>
         /// Set colors for menu items. Overrides global settings.
@@ -98,15 +98,15 @@
         public IMenu SetItemsColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
 
         /// <summary>
-        /// Set colors for non traverserable menu items. Overrides global settings.
+        /// Set colors for non traversable menu items. Overrides global settings.
         /// </summary>
         /// <param name="backgroundColor">Color to be set as background color.</param>
         /// <param name="fontColor">Color to be sent as font color.</param>
         /// <returns>Current instance of <see cref="IMenu"/>.</returns>
-        public IMenu SetNonTraverserableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
+        public IMenu SetNonTraversableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor);
 
         /// <summary>
-        /// Set colors for highlited menu item. Overrides global settings.
+        /// Set colors for highlighted menu item. Overrides global settings.
         /// </summary>
         /// <param name="pointer">Character to be used as pointer.</param>
         /// <returns>Current instance of <see cref="IMenu"/>.</returns>

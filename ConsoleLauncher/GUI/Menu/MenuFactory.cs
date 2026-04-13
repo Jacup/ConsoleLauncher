@@ -34,13 +34,13 @@
         public IReadOnlyCollection<IMenuItem> Items => _items;
 
         /// <inheritdoc/>
-        public (ConsoleColor Background, ConsoleColor Foreground)? HighlitedItemColors { get; private set; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? HighlightedItemColors { get; private set; }
 
         /// <inheritdoc/>
         public (ConsoleColor Background, ConsoleColor Foreground)? ItemColors { get; private set; }
 
         /// <inheritdoc/>
-        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraverserableItemColors { get; private set; }
+        public (ConsoleColor Background, ConsoleColor Foreground)? NonTraversableItemColors { get; private set; }
 
         /// <inheritdoc/>
         public bool CustomPointerIndexFlag { get; private set; }
@@ -87,17 +87,17 @@
         }
 
         /// <inheritdoc/>
-        public IMenu SetHighlitedColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
+        public IMenu SetHighlightedColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
-            HighlitedItemColors = (backgroundColor, fontColor);
+            HighlightedItemColors = (backgroundColor, fontColor);
 
             return this;
         }
 
         /// <inheritdoc/>
-        public IMenu SetNonTraverserableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
+        public IMenu SetNonTraversableItemColors(ConsoleColor backgroundColor, ConsoleColor fontColor)
         {
-            NonTraverserableItemColors = (backgroundColor, fontColor);
+            NonTraversableItemColors = (backgroundColor, fontColor);
 
             return this;
         }
@@ -134,8 +134,8 @@
                 PointerChar = Launcher.Settings.PointerCharacter;
 
             ItemColors ??= Launcher.Settings.Colors.DefaultItemColors();
-            HighlitedItemColors ??= Launcher.Settings.Colors.DefaultHighlitedColors();
-            NonTraverserableItemColors ??= Launcher.Settings.Colors.DefaultNonTraverserableColors();
+            HighlightedItemColors ??= Launcher.Settings.Colors.DefaultHighlitedColors();
+            NonTraversableItemColors ??= Launcher.Settings.Colors.DefaultNonTraverserableColors();
 
             if (CustomPointerIndexFlag)
             {

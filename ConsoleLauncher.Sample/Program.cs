@@ -35,7 +35,7 @@
             Launcher.Menu
                 .AddItem(new MenuItem("Switch header visibility", SwitchHeaderVisibility))
                 .AddItem(new MenuItem("Four"))
-                .SetHighlitedColors(ConsoleColor.Blue, ConsoleColor.Yellow)
+                .SetHighlightedColors(ConsoleColor.Blue, ConsoleColor.Yellow)
                 .AddReturnItem()
                 .AddExitItem()
                 .Print();
